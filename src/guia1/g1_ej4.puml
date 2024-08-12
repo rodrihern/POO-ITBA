@@ -1,0 +1,17 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+class Affiliate {
+    -static int lastNumber
+    -String firstName
+    -String lastName
+    -Date birth
+    -int affiliateNumber
+    +Affiliate(String firstName, String lastName, Date birth)
+    -static int getAndIncrement()
+    +String getFirstName()
+    +String getLastName()
+    +Date getDateOfBirth()
+
+}
+@enduml

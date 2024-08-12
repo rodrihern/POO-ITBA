@@ -1,4 +1,4 @@
-package Taller;
+package taller;
 
 public class Counter {
 }

@@ -1,0 +1,13 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+class ComplexNumber {
+    -double realPart
+    -double imaginaryPart
+    +ComplexNumber(double real, double imaginary)
+    +ComplexNumber(double real)
+    +double getRealPart()
+    +double getImaginaryPart()
+    +ComplexNumber sum(ComplexNumber n)
+}
+
+@enduml
