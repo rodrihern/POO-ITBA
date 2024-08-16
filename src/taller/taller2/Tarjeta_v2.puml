@@ -1,0 +1,47 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+
+abstract class TarjetaSubte {
+    -Central sc
+    +Tarjeta(Central sc)
+    +{abstract}viajar()
+    #{abstract}boolan puedoViajar()
+    #double getPrice()
+}
+
+class TarjetaFija {
+    -int viajes
+    +TarjetaFija(Central sc, int viajes)
+    +void viajar()
+    #boolean puedoViajar()
+}
+
+class TarjetaRecargable {
+    -double saldo
+    +TarjetaRecargable(Central sc)
+    +void viajar()
+    #boolean puedoViajar()
+    +void recargar(double monto)
+}
+
+
+TarjetaSubte *-- Central
+TarjetaSubte <|-- TarjetaRecargable
+TarjetaSubte <|-- TarjetaFija
+
+
+class Central {
+    -double price
+    +Central(double price)
+    +void setPrice(double price)
+    +double getPrice()
+}
+
+
+
+
+
+
+
+@enduml

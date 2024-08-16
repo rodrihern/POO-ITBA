@@ -3,5 +3,6 @@ class Gear {
     -double ratio
     +Gear(int chainRing, int cog)
     +double getRatio()
+    +void hola
 }
 @enduml

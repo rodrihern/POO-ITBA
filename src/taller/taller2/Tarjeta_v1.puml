@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+class TarjetaSubte {
+    -double saldo
+    -Central sc
+    +Tarjeta(Central sc)
+    +void recargar(double saldo)
+    +double getSaldo()
+    +void viajar()
+    -boolean puedoViajar()
+
+}
+
+TarjetaSubte *-- Central
+
+class Central {
+    -double price
+    +Central(double price)
+    +void setPrice(double price)
+    +double getPrice()
+}
+
+
+
+
+
+
+
+@enduml
