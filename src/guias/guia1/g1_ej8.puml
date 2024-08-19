@@ -1,0 +1,71 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+class Point {
+    -double x
+    -double y
+    +Point(double x, double y)
+    +double distanceTo(Point otherPoint)
+}
+
+abstract class GeometricShape {
+    +{abstract} double area()
+    +{abstract} double perimeter()
+}
+
+abstract class Polygon {
+    -Points points[]
+    -double base
+    -double height
+    +Polygon(double base, double height)
+    +double area()
+    +double perimeter()
+    +double getBase()
+    +double getHeight()
+}
+
+abstract class RoundShape {
+    -Point centerPoint
+    +RoundShape(Point centerPoint)
+    +{abstract} double area()
+    +{abstract} double perimeter()
+    +double getPi()
+}
+
+GeometricShape <|-- Polygon
+GeometricShape <|-- RoundShape
+Polygon <|-- Rectangle
+Polygon <|-- Triangle
+RoundShape <|-- Circle
+RoundShape <|-- Ellipse
+RoundShape *-- Point
+Polygon *-- Point
+
+class Rectangle {
+    +Rectangle(Points points[4])
+    +double getBase()
+    +double getHeight()
+}
+
+class Triangle {
+    +Triangle(Points points[3])
+    +double area()
+}
+
+class Circle {
+    -double radius
+    +Circle(Point centerPoint, double radius)
+    +double area()
+    +double perimeter()
+}
+
+class Ellipse {
+    -double a
+    -double b
+    +Ellipse(Point centerPoint, double a, double b)
+    +double area()
+    +double perimeter()
+}
+
+
+@enduml

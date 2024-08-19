@@ -1,54 +1,48 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-
-abstract class TarjetaSubte {
-    -Central cs
-    +Tarjeta(Central cs)
-    +{abstract}viajar()
-    #{abstract}boolan puedoViajar()
-    #double getPrice()
+abstract class SubwayCard {
+    -SubwayCentral central
+    +SubwayCard(SubwayCentral sc)
+    #double rideCost()
+    #{abstract}boolean canRide()
+    +{abstract}void ride()
 }
 
-class TarjetaFija {
-    -int viajes
-    +TarjetaFija(Central cs, int viajes)
-    +void viajar()
+SubwayCard <|-- FixedSubwayCard
+SubwayCard <|-- RechargableSubwayCard
+SubwayCard *-- SubwayCentral
+
+class FixedSubwayCard {
+    -int rides
+    +FixedSubwayCard(int rides, SubwayCentral sc)
+    #int canRide()
+    +void ride()
 }
 
-class TarjetaRecargable {
-    -double saldo
-    +TarjetaRecargable(Central cs)
-    +void viajar()
-    #boolean puedoViajar()
-    +void recargar(double monto)
+class RechargableSubwayCard {
+    -double balance
+    +RechargableSubwayCard(SubwayCentral sc)
+    +void recharge(doble amount)
+    +void ride()
+    #int canRide()
+    #double rideCost()
 }
 
-class TarjetaRecargableDescuento {
+RechargableSubwayCard <|-- RechargableDiscountSubwayCard
+
+class RechargableDiscountSubwayCard {
     -double discount
-    +TarjetaRecargableDescuento(Central cs, double discount)
-    +void viajar()
-    #boolean puedoViajar()
-
+    +RechargableSubwayCard(SubwayCentral sc, double dc)
+    #double rideCost()
 }
 
-
-TarjetaSubte *-- Central
-TarjetaSubte <|-- TarjetaRecargable
-TarjetaSubte <|-- TarjetaFija
-TarjetaRecargable <|-- TarjetaRecargableDescuento
-
-
-class Central {
-    -double price
-    +Central(double price)
-    +void setPrice(double price)
-    +double getPrice()
+class SubwayCentral {
+    -double rideCost()
+    +SubwayCentral(double rideCost)
+    +void setRideCost(double cost)
+    +double getRideCost()
 }
-
-
-
-
 
 
 
