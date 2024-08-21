@@ -1,8 +1,0 @@
-tell dont ask
-cuando llamo a un constructor tiene que quedar "ready to work"
-
-herencia (es-un) <|--
-composicion (tiene-un) *--
-{abstract} para poner un metodo que las clases hijas tienen que implementar
-
-
