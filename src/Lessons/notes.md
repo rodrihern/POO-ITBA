@@ -15,10 +15,10 @@ cuando llamo a un constructor tiene que quedar "ready to work"
 
 
 # java
-### igualdad vs equivalencia
 
-== igualdad </br>
-.equals() equivalencia
+## Metodos comunes a todos los objetos
+
+### equals()
 
 para mi class tengo que sobreescribir el metodo .equals() para usarlo </br>
 
@@ -35,6 +35,22 @@ public boolean equals(Object obj) {
 }
 ```
 
+### hashCode()
+siempre que se implemente <b>equals()</b>
+se debe implementar <b>hashCode()</b>
+
+en hashCode() se deben poner las mismas propiedades 
+que se comparan en equals
+
+```
+@Override
+public int hashCode() {
+    return Objects.hash(prop1, prop2, prop3);
+}
+```
+
+### toString()
+
 Ejemplo de toString()
 ```
 @Override
@@ -43,7 +59,7 @@ public String toString() {
 }
 ```
 
-### for-each
+## for-each
 ```
 for(int x : v1) {
     ...
@@ -52,14 +68,14 @@ for(int x : v1) {
 donde x es cada elemento del array v1 (parecido al for de python) </br>
 la variable x es read-only
 
-### Argumentos variables
+## Argumentos variables
 ```
 int foo(int... values) {
 
 }
 ```
 
-### Strings
+## Strings
 
 Es inmutable, osea que los metodos siepre devuelven una nueva instancia
 
@@ -72,12 +88,13 @@ este es un string</br>
 en 2 dimensiones</br>
 """
 
-### Manejo de errores
+
+## Manejo de errores
 Cuando hay un error se genera un objeto Exception
 
 Hay de 2 tipos:
-* checked exception
-* unchecked exception
+* checked exception (extienden a exception)
+* unchecked exception (extienden a RunTimeException o Error)
 
 Uno puede capturar estos errores y evitar que el programa aborte
 
@@ -90,6 +107,11 @@ try {
 ```
 
 Uno puede crear sus propias excepciones extendiendo a Exception o RuntimeException
+
+siempre debe invocarse un metodo que lance <b>checked</b> exceptions
+dentro de un bloque try-catch. Si en un programa de prueba aparece 
+un metodo que lanza excepcion fuera de un bloque try-catch,
+esa es una <b>unchecked</b> exception. 
 
 # uml
 herencia (es-un) <|--
