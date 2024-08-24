@@ -1,4 +1,4 @@
-package Lessons;
+package teoria;
 
 public class Date {
     private int day, month, year;
