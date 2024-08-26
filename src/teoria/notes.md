@@ -45,7 +45,7 @@ que se comparan en equals
 ```
 @Override
 public int hashCode() {
-    return Objects.hash(prop1, prop2, prop3);
+    return Objects.hash( /*aca van las props*/ );
 }
 ```
 
