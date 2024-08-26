@@ -111,7 +111,11 @@ Uno puede crear sus propias excepciones extendiendo a Exception o RuntimeExcepti
 siempre debe invocarse un metodo que lance <b>checked</b> exceptions
 dentro de un bloque try-catch. Si en un programa de prueba aparece 
 un metodo que lanza excepcion fuera de un bloque try-catch,
-esa es una <b>unchecked</b> exception. 
+esa es una **unchecked** exception. 
+
+
+
+
 
 # uml
 herencia (es-un) <|--

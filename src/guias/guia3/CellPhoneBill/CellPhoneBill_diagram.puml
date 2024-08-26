@@ -1,0 +1,45 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+class Call {
+    - String from
+    - String to
+    - int duration
+    - static double COST_PER_SECOND
+
+    + Call(String from, String to, int duration)
+    + double getCost()
+    + double getTo()
+}
+
+class CellPhoneBill {
+    - String number
+    # Call[] calls
+    # int callsIndex
+    - static int DEFAULT_SIZE
+    + CellPhoneBill(String number)
+    + void registerCall(String toNumber, int duration)
+    + void setDiscount(double discount)
+    + double processBill()
+    - void addCall(Call call)
+    - void resize()
+}
+
+class FriendCellPhoneBill {
+    - String[] friends
+    - int maxFriends
+    - int friendIndex
+    - double discount
+
+    + FriendCellPhoneBill(String number, int maxFriends, double discount)
+    + void setDiscount(double discount)
+    + void addFriend(String number)
+    + void removeFriend(String number)
+    + double processBill()
+    - boolean isFriend(String number)
+}
+
+CellPhoneBill <|-- FriendCellPhoneBill
+CellPhoneBill *-- Call
+
+@enduml
