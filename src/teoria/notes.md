@@ -234,7 +234,7 @@ Tiene que ver con el comportamiento principal del objeto|Comportamiento que van 
 
 ## Tipos genericos
 
-[video: Generics](https://www.youtube.com/results?search_query=coding+with+john+generics)
+[video: Generics](https://youtu.be/K1iu1kXkVoA?si=li8nvRSyFkGMfsCU)
 
 + Permiten la parametrización de tipos de datos (clases e interfaces)
 + Permiten escribir código reusable por objetos de distinto tipo
