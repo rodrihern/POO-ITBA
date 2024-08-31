@@ -169,9 +169,9 @@ en total se harian cuatro instancias.
 Nadie de afuera puede llamar al constructor mas que la jvm
 
 Algunos metodos de clase:
-+ ordinal
-+ valueOf
-+ values
+* ordinal
+* valueOf
+* values
 
 Se pueden dar metodos abstractos a cada una de las instancias
 
@@ -226,9 +226,9 @@ Igual para hacer bien una interfaz se deben usar tipos de datos genericos
 ## Clase abstracta vs interfaz
 [video: Abstract classes](https://www.youtube.com/watch?v=HvPlEJ3LHgE)
 
-| Clase abstracta                                          | interfaz|
-|----------------------------------------------------------|---|
-| Tiene que ver con el comportamiento principal del objeto |Comportamiento que van a usar varias clases que no tienen nada que ver. Tiene que ver con un comportamiento adicional|
+| Clase abstracta                                          | interfaz                                                                                                              |
+|----------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
+| Tiene que ver con el comportamiento principal del objeto | Comportamiento que van a usar varias clases que no tienen nada que ver. Tiene que ver con un comportamiento adicional |
 
 
 
@@ -236,8 +236,8 @@ Igual para hacer bien una interfaz se deben usar tipos de datos genericos
 
 [video: Generics](https://youtu.be/K1iu1kXkVoA?si=li8nvRSyFkGMfsCU)
 
-+ Permiten la parametrización de tipos de datos (clases e interfaces)
-+ Permiten escribir código reusable por objetos de distinto tipo
+* Permiten la parametrización de tipos de datos (clases e interfaces)
+* Permiten escribir código reusable por objetos de distinto tipo
 
 Como declarar una interfaz con generics
 ``` java
@@ -258,7 +258,7 @@ public class Date implements Comparable<Date> {
 
 # uml
 
-+ herencia (es-un) <|--
-+ composicion (tiene-un) *--
-+ {abstract} para poner un metodo que las clases hijas tienen que implementar
+* herencia (es-un) <|--
+* composicion (tiene-un) *--
+* {abstract} para poner un metodo que las clases hijas tienen que implementar
 
