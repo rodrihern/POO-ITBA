@@ -1,3 +1,7 @@
-# DISCLAIMER
+# Programacion orientada a objetos
 
-Los ejercicios no estan todos perfectos sino que son los que voy haciendo durante la cursada.
+Dentro de la carpeta *src* estan los codigos que fui haciendo en las guias y los talleres
+
+Dentro de esa misma carpeta se encuentra el directorio *teoria* donde estan las notas que fui tomando en clase
+
+Que tengan una linda cursada :)

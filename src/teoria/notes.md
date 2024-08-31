@@ -1,6 +1,6 @@
 
 
-# Paradigma
+# Programacion Orientada a Objetos
 Polimorfismo: puedo tener distintos metodos con el mismo nombre y diferentes implementaciones
 
 Herencia (es-un)
