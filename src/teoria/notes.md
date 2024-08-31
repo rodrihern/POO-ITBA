@@ -27,7 +27,7 @@ para mi class tengo que sobreescribir el metodo .equals() para usarlo </br>
 .equals(Object obj) es de la clase Object
 
 Ejemplo
-```
+``` java
 @Override
 public boolean equals(Object obj) {
     return obj instanceof Date date &&
@@ -40,13 +40,13 @@ public boolean equals(Object obj) {
 
 
 ### hashCode()
-siempre que se implemente <b>equals()</b>
-se debe implementar <b>hashCode()</b>
+siempre que se implemente **equals()**
+se debe implementar **hashCode()**
 
 en hashCode() se deben poner las mismas propiedades 
 que se comparan en equals
 
-```
+``` java
 @Override
 public int hashCode() {
     return Objects.hash( /*aca van las props*/ );
@@ -56,7 +56,7 @@ public int hashCode() {
 ### toString()
 
 Ejemplo de toString()
-```
+``` java
 @Override
 public String toString() {
     return "%d/%d/%d".formatted(day, month, year);
@@ -64,7 +64,7 @@ public String toString() {
 ```
 
 ## for-each
-```
+``` java
 for(int x : v1) {
     ...
 }
@@ -73,7 +73,7 @@ donde x es cada elemento del array v1 (parecido al for de python) </br>
 la variable x es read-only
 
 ## Argumentos variables
-```
+``` java
 int foo(int... values) {
 
 }
@@ -109,7 +109,7 @@ Hay de 2 tipos:
 
 Uno puede capturar estos errores y evitar que el programa aborte
 
-```
+``` java
 try {
     method();
 } catch (DataAccessException e) {
@@ -137,7 +137,7 @@ Son constantes que podemos tratar como objetos
 
 Ejemplo:
 
-```
+``` java
 public enum Rating {
   SUCCESS("Success", 10),
   GOOD("Good", 7),
@@ -176,7 +176,7 @@ Algunos metodos de clase:
 Se pueden dar metodos abstractos a cada una de las instancias
 
 Ejemplo:
-```
+``` java
 public enum Operation {
    ADD("+") {
        @Override
@@ -214,7 +214,7 @@ Los metodos de las interfaces son todos abstractos y publicos
 Hay herencia multiple de interfaces ya que no tienen estado interno
 
 Para que una clase implemente una interfaz:
-```
+``` java
 public class Date implements ObjectToCsv {
     ...
 }
@@ -226,9 +226,9 @@ Igual para hacer bien una interfaz se deben usar tipos de datos genericos
 ## Clase abstracta vs interfaz
 [video: Abstract classes](https://www.youtube.com/watch?v=HvPlEJ3LHgE)
 
-Clase abstracta | interfaz
----|---
-Tiene que ver con el comportamiento principal del objeto|Comportamiento que van a usar varias clases que no tienen nada que ver. Tiene que ver con un comportamiento adicional
+| Clase abstracta                                          | interfaz|
+|----------------------------------------------------------|---|
+| Tiene que ver con el comportamiento principal del objeto |Comportamiento que van a usar varias clases que no tienen nada que ver. Tiene que ver con un comportamiento adicional|
 
 
 
@@ -240,13 +240,13 @@ Tiene que ver con el comportamiento principal del objeto|Comportamiento que van 
 + Permiten escribir código reusable por objetos de distinto tipo
 
 Como declarar una interfaz con generics
-```
+``` java
 public interface Comparable<T> {
    int compareTo(T other);
 }
 ```
 Como implementarla en una clase
-```
+``` java
 public class Date implements Comparable<Date> {
     ...
     @Override
