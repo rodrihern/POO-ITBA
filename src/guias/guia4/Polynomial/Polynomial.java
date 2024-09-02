@@ -1,7 +1,7 @@
 package guias.guia4.Polynomial;
 
 public class Polynomial {
-    double[] poly;
+    private double[] poly;
 
     public Polynomial(int grade) throws InvalidGradeException {
         if(grade < 0) {
