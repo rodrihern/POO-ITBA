@@ -18,6 +18,8 @@ public abstract class BankAccount {
     public void extract(double amount) {
         if(canExtract(amount)) {
             balance -= amount;
+        } else {
+            throw new RuntimeException("Insufficient funds");
         }
     }
 
