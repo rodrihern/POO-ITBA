@@ -1,7 +1,7 @@
 package guias.guia3.Figure;
 
 public class Ellipse extends Figure{
-    Point centerPoint;
+    protected Point centerPoint;
     double a;
     double b;
 

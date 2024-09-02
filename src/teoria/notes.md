@@ -16,6 +16,8 @@ cuando llamo a un constructor tiene que quedar "ready to work"
 
 # java
 
+[Cursito de freeCodeCamp](https://www.youtube.com/watch?v=A74TOX803D0)
+
 ## Metodos comunes a todos los objetos
 
 ### equals()
