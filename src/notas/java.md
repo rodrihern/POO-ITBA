@@ -1,19 +1,5 @@
 
 
-# Programacion Orientada a Objetos
-Polimorfismo: puedo tener distintos metodos con el mismo nombre y diferentes implementaciones
-
-Herencia (es-un)
-
-Composicion (tiene-un)
-
-tell dont ask
-
-tratamos de evitar usar excesivos if (eso es muy imperativo)
-
-cuando llamo a un constructor tiene que quedar "ready to work"
-
-
 # java
 
 [Cursito de freeCodeCamp](https://www.youtube.com/watch?v=A74TOX803D0)
@@ -222,7 +208,22 @@ public class Date implements ObjectToCsv {
 }
 ```
 
-Igual para hacer bien una interfaz se deben usar tipos de datos genericos
+### Comparable
+
+### Comparator
+
+### Iterable
+
+### Iterator
+
+
+## Funcional interface
+
+### Lambda expressions
+
+[video: lambda expressions](https://www.youtube.com/watch?v=tj5sLSFjVj4)
+
+
 
 
 ## Clase abstracta vs interfaz
@@ -258,9 +259,5 @@ public class Date implements Comparable<Date> {
 }
 ```
 
-# uml
 
-* herencia (es-un) <|--
-* composicion (tiene-un) *--
-* {abstract} para poner un metodo que las clases hijas tienen que implementar
 
