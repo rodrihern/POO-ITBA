@@ -1,6 +1,0 @@
-
-
-TODO:
-
-* completar lo de comparable y comparator
-* ver video de john de lambda

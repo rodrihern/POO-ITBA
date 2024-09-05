@@ -210,14 +210,6 @@ public class Date implements ObjectToCsv {
 }
 ```
 
-### Comparable
-
-### Comparator
-
-### Iterable
-
-### Iterator
-
 
 ## Funcional interface
 
@@ -229,6 +221,67 @@ Ejemplo
 @FunctionalInterface
 public interface Operation {
     double apply(double n1, double n2);
+}
+```
+
+### Comparable
+
+Una clase que implemente comparable tiene que definir un compareTo()
+
+Ejemplo:
+
+``` java
+public class Date implements Comparable<Date> {
+    ...
+    @Override
+    public int compareTo(Date otherDate) {
+        ...
+    }
+}
+```
+
+### Comparator
+
+Es una interfaz funcional que tiene la funcion compare
+
+Ejemplo de implementacion:
+
+``` java
+public class DateComparator implements Comparator<Date> {
+    ...
+    @Override
+    public int compare(Date d1, Date d2) {
+        ...
+    }
+    
+}
+```
+
+Un metodo default util que se puede usar de Comparator es el siguiente:
+
+``` java
+Arrays.sort(myArray, Comparator.reverseOrder());
+```
+
+donde myArray es un array que implementa Comparable
+
+### Function
+
+``` java
+@FunctionalInterface
+public interface Function<T, R> {
+    R apply(T t);
+	...
+}
+```
+
+### Predicate
+
+``` java
+@FunctionalInterface
+public interface Predicate<T, R> {
+    boolean test(T t);
+	...
 }
 ```
 
@@ -244,6 +297,7 @@ Son como las arrow functions de javascript
 // es una funcion anonima que devuelve la suma de los dos argumentos
 ```
 
+Sirve para pasar como parametro una interfaz funcional sin la necesidad de declararla
 
 
 
@@ -271,7 +325,7 @@ public interface Comparable<T> {
 ```
 Como implementarla en una clase
 ``` java
-public class Date implements Comparable<Date> {
+public class Date implements Comparable<? super Date> {
     ...
     @Override
     public int compareTo(Date d) {
