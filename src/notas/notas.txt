@@ -1,8 +1,6 @@
-tratar de que los enum tengan el mayor comportamiento posible
 
 
 TODO:
 
-* completar lo de interfaces y Arrays genericos
-* terminar hasta el 15 de la guia 4
+* completar lo de comparable y comparator
 * ver video de john de lambda

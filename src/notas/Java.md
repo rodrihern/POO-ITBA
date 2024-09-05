@@ -163,6 +163,8 @@ Algunos metodos de clase:
 
 Se pueden dar metodos abstractos a cada una de las instancias
 
+se busca que los enum tengan el mayor comportamiento posible
+
 Ejemplo:
 ``` java
 public enum Operation {
@@ -219,9 +221,28 @@ public class Date implements ObjectToCsv {
 
 ## Funcional interface
 
+Es una interfaz que tiene un solo metodo abstracto, (puede tener mas defaults pero uno solo abstracto)
+
+Ejemplo
+
+``` java
+@FunctionalInterface
+public interface Operation {
+    double apply(double n1, double n2);
+}
+```
+
 ### Lambda expressions
 
 [video: lambda expressions](https://www.youtube.com/watch?v=tj5sLSFjVj4)
+
+Son como las arrow functions de javascript
+
+``` java
+(x, y) -> x + y
+
+// es una funcion anonima que devuelve la suma de los dos argumentos
+```
 
 
 
