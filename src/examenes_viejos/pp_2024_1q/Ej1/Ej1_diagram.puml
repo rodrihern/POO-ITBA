@@ -1,0 +1,52 @@
+@startuml
+
+class Pier {
+    -String name
+    -FerryCompany fc
+    -int capacity
+    -int occupied
+    +Pier(String name, FerryCompany fc, int capacity)
+    # boolean canDock(Ferry ferry, LocalTime time)
+    # boolean canUndock(Ferry ferry, localTime time)
+    +void dock(Ferry ferry, LocalTime time)
+    +void undock(Ferry ferry, localTime time)
+}
+
+class PierTime {
+    -LocalTime open
+    -LocalTime close
+    +PierTime(String name, FerryCompany fc, int capacity, LocalTime open, LocalTime close)
+    # boolean canDock(Ferry ferry, LocalTime time)
+}
+
+class PierTimeStack {
+    -Ferry last
+    +PierTimeStack(String name, FerryCompany fc, int capacity, LocalTime open, LocalTime close)
+    # canUndock(Ferry ferry, LocalTime time)
+    +void dock(Ferry ferry, LocalTime time)
+    +void undock(Ferry ferry, LocalTime time)
+}
+
+class Ferry {
+    -String name
+    -FerryCompany company
+    +Ferry(String name, FerryCompany c)
+    +FerryCompany getCompany()
+    +String toString()
+    +boolean equals(Object obj)
+    +int hashCode()
+}
+
+class FerryCompany {
+    -String name
+    +FerryCompany(String name)
+    +String toString()
+    +boolean equals(Object obj)
+    +int hashCode()
+}
+
+Ferry *-- FerryCompany
+Pier *-- FerryCompany
+Pier <|-- PierTime
+PierTime <|-- PierTimeStack
+@enduml

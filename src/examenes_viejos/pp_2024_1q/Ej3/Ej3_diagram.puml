@@ -5,8 +5,10 @@ class Counter {
     -int idx
     -String airline
     +Counter(String airline)
-    +String toString()
+    +boolean getIsIdle()
+    +String getAirline()
     +void checkIn();
+    +String toString()
     +int compareTo(Counter c)
 
 
@@ -16,7 +18,7 @@ class Airport {
     -Counter[] counters
     +Airport()
     +Counter addCounter(String airline, int idx)
-    +void counterCheckin(Predicate)
+    +void counterCheckin(Predicate pred)
     +Counter[] airlineOrderCounters()
     +Counter[] airlineDescendingOrderCounters()
 }
