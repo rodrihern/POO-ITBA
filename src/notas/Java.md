@@ -294,7 +294,7 @@ Son como las arrow functions de javascript
 ``` java
 (x, y) -> x + y
 
-// es una funcion anonima que devuelve la suma de los dos argumentos
+// es una funcion anonima que devuelve la suma de los dos argumentos que recibe
 ```
 
 Sirve para pasar como parametro una interfaz funcional sin la necesidad de declararla

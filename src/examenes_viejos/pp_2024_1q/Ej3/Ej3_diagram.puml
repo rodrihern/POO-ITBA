@@ -1,0 +1,25 @@
+@startuml
+
+class Counter {
+    -boolean isIdle
+    -int idx
+    -String airline
+    +Counter(String airline)
+    +String toString()
+    +void checkIn();
+    +int compareTo(Counter c)
+
+
+}
+
+class Airport {
+    -Counter[] counters
+    +Airport()
+    +Counter addCounter(String airline, int idx)
+    +void counterCheckin(Predicate)
+    +Counter[] airlineOrderCounters()
+    +Counter[] airlineDescendingOrderCounters()
+}
+
+Airport *-- Counter
+@enduml
