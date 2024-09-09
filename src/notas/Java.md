@@ -82,6 +82,18 @@ este es un string</br>
 en 2 dimensiones</br>
 """
 
+## Arrays
+
+En java son medio cualquier cosa porque no son ni primitivos ni objetos.
+
+ejemplo de resize
+
+``` java
+private void resize() {
+    myArray = Arrays.copyOf(myArray, myArray.length + BLOCK);
+}
+```
+
 
 ## Manejo de errores
 
