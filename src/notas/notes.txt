@@ -1,3 +1,5 @@
+agregar como hacer arrays de tipos genericos
+
 TODO:
 * terminar guia iterable e iterator
 * hacer muchos parciales

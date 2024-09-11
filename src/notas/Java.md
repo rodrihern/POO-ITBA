@@ -223,7 +223,41 @@ public class Date implements ObjectToCsv {
 ```
 
 
-## Funcional interface
+## Clase abstracta vs interfaz
+[video: Abstract classes](https://www.youtube.com/watch?v=HvPlEJ3LHgE)
+
+| Clase abstracta                                          | interfaz                                                                                                              |
+|----------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
+| Tiene que ver con el comportamiento principal del objeto | Comportamiento que van a usar varias clases que no tienen nada que ver. Tiene que ver con un comportamiento adicional |
+
+
+
+## Tipos genericos
+
+[video: Generics](https://youtu.be/K1iu1kXkVoA?si=li8nvRSyFkGMfsCU)
+
+* Permiten la parametrización de tipos de datos (clases e interfaces)
+* Permiten escribir código reusable por objetos de distinto tipo
+
+Como declarar una interfaz con generics
+``` java
+public interface Comparable<T> {
+   int compareTo(T other);
+}
+```
+Como implementarla en una clase
+``` java
+public class Date implements Comparable<? super Date> {
+    ...
+    @Override
+    public int compareTo(Date d) {
+        ...
+    }
+}
+```
+
+
+## Funcional interfaces
 
 Es una interfaz que tiene un solo metodo abstracto, (puede tener mas defaults pero uno solo abstracto)
 
@@ -297,6 +331,7 @@ public interface Predicate<T, R> {
 }
 ```
 
+
 ### Lambda expressions
 
 [video: lambda expressions](https://www.youtube.com/watch?v=tj5sLSFjVj4)
@@ -312,39 +347,8 @@ Son como las arrow functions de javascript
 Sirve para pasar como parametro una interfaz funcional sin la necesidad de declararla
 
 
+### Iterable e iterator
 
-## Clase abstracta vs interfaz
-[video: Abstract classes](https://www.youtube.com/watch?v=HvPlEJ3LHgE)
-
-| Clase abstracta                                          | interfaz                                                                                                              |
-|----------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
-| Tiene que ver con el comportamiento principal del objeto | Comportamiento que van a usar varias clases que no tienen nada que ver. Tiene que ver con un comportamiento adicional |
-
-
-
-## Tipos genericos
-
-[video: Generics](https://youtu.be/K1iu1kXkVoA?si=li8nvRSyFkGMfsCU)
-
-* Permiten la parametrización de tipos de datos (clases e interfaces)
-* Permiten escribir código reusable por objetos de distinto tipo
-
-Como declarar una interfaz con generics
-``` java
-public interface Comparable<T> {
-   int compareTo(T other);
-}
-```
-Como implementarla en una clase
-``` java
-public class Date implements Comparable<? super Date> {
-    ...
-    @Override
-    public int compareTo(Date d) {
-        ...
-    }
-}
-```
 
 
 
