@@ -10,12 +10,10 @@
 
 [video: equals() vs ==](https://www.youtube.com/watch?v=AoUVdLWLFQw)
 
-para mi class tengo que sobreescribir el metodo .equals() para usarlo </br>
-
-.equals(Object obj) es de la clase Object
+Es un metodo de la clase Object que debo sobreescribir si quiero que mi clase tenga comportamiento de equivalencia
 
 Ejemplo
-``` java
+```java
 @Override
 public boolean equals(Object obj) {
     return obj instanceof Date date &&
@@ -31,20 +29,20 @@ public boolean equals(Object obj) {
 siempre que se implemente **equals()**
 se debe implementar **hashCode()**
 
-en hashCode() se deben poner las mismas propiedades 
+en *hashCode()* se deben poner las mismas propiedades 
 que se comparan en equals
 
-``` java
+```java
 @Override
 public int hashCode() {
-    return Objects.hash( /*aca van las props*/ );
+    return Objects.hash( /* aca van las props */ );
 }
 ```
 
 ### toString()
 
 Ejemplo de toString()
-``` java
+```java
 @Override
 public String toString() {
     return "%d/%d/%d".formatted(day, month, year);
@@ -53,17 +51,37 @@ public String toString() {
 
 ## for-each
 ``` java
-for(int x : v1) {
-    ...
+for(int x : myIntArray) {
+    // ...
 }
 ```
-donde x es cada elemento del array v1 (parecido al for de python) </br>
 la variable x es read-only
 
 ## Argumentos variables
 ``` java
 int foo(int... values) {
+    // ...
+}
+```
 
+## Arrays
+
+En java son medio cualquier cosa porque no son ni primitivos ni objetos.
+
+Formas de crear un array
+
+````java
+int[] intArray = {1, 2, 3, 4};
+int[] intArray2 = new int[3]; // [ 0 , 0 , 0 ]
+String[] words = new String[]{"hola", "que", "tal"}; 
+Object[] objArray = new Object[3]; // [null, null, null]
+````
+
+Ejemplo de resize
+
+```java
+private void resize() {
+    myArray = Arrays.copyOf(myArray, myArray.length + BLOCK);
 }
 ```
 
@@ -71,29 +89,19 @@ int foo(int... values) {
 
 [video: Why strings are inmutable](https://www.youtube.com/watch?v=Bj9Mx_Lx3q4&list=PLkeaG1zpPTHhXOfy-mFbdqd1Zz4GnjcpC&index=34)
 
-Es inmutable, osea que los metodos siepre devuelven una nueva instancia
+Son inmutables, osea que los metodos siepre devuelven una nueva instancia
 
-usar StringBuilder para concatenaciones usando .append() <b>especialmente en ciclos</b>
+Usar **StringBuilder** para concatenaciones usando .append() *especialmente en **ciclos***
 
-"este es un string en una dimension"
-
-""" </br>
-este es un string</br>
-en 2 dimensiones</br>
-"""
-
-## Arrays
-
-En java son medio cualquier cosa porque no son ni primitivos ni objetos.
-
-ejemplo de resize
-
-``` java
-private void resize() {
-    myArray = Arrays.copyOf(myArray, myArray.length + BLOCK);
+```` java
+StringBuilder str = new StringBuilder();
+String[] words = new String[]{"hola", "que", "tal"};
+for(String word : words) {
+    str.append(word + " ");
 }
-```
+System.out.println(str.toString()); // hola que tal 
 
+````
 
 ## Manejo de errores
 
@@ -104,20 +112,18 @@ private void resize() {
 Cuando hay un error se genera un objeto Exception
 
 Hay de 2 tipos:
-* checked exception (extienden a exception)
-* unchecked exception (extienden a RunTimeException o Error)
+* Checked exception 
+* Unchecked exception 
 
 Uno puede capturar estos errores y evitar que el programa aborte
 
 ``` java
 try {
     method();
-} catch (DataAccessException e) {
-     ...
+} catch (Exception e) {
+    // ...
 }
 ```
-
-Uno puede crear sus propias excepciones extendiendo a Exception o RuntimeException
 
 | Checked                                                                   | Unchecked                         |
 |---------------------------------------------------------------------------|-----------------------------------|
@@ -125,6 +131,7 @@ Uno puede crear sus propias excepciones extendiendo a Exception o RuntimeExcepti
 | Extiende a Exception                                                      | Extiende a RunTimeException       |
 
 Para crear tu propia exception
+
 ````java
 public class myException extends RuntimeException {
     private static final String MESSAGE = "Pasaron cosas";
@@ -144,55 +151,58 @@ Como toda clase, puede tener metodos y atributos
 
 Son constantes que podemos tratar como objetos
 
-Nadie de afuera puede llamar al constructor mas que la jvm
-
 Algunos metodos de clase:
 * ordinal
 * valueOf
 * values
 
-se busca que los enum tengan el mayor comportamiento posible
+Se busca que los enum tengan el mayor comportamiento posible
 
 Ejemplo:
+
 ```java
 public enum Operation {
-   ADD("+") {
-       @Override
-       public double apply(double op1, double op2) {
-           return op1 + op2;
-       }
-   },
-   SUBTRACT("-") { /* ... */ }, MULTIPLY("*") { /* ... */ }, DIVIDE("/") { /* ... */ };
+    ADD("+") {
+        @Override
+        public double apply(double op1, double op2) {
+            return op1 + op2;
+        }
+    },
+    SUBTRACT("-") { /* ... */ },
+    MULTIPLY("*") { /* ... */ },
+    DIVIDE("/") { /* ... */ };
 
-   private final String symbol;
+    private final String symbol;
 
-   Operation(String symbol) { this.symbol = symbol; }
+    Operation(String symbol) {
+        this.symbol = symbol;
+    }
 
-   public abstract double apply(double op1, double op2);
-
-   public static double evaluate(double op1, double op2, String op) {
-       for (Operation instance : values()) {
-           if (instance.symbol.equals(op)) {
-               return instance.apply(n1, n2);
-           }
-       }
-       throw new IllegalArgumentException();
-   }
-
+    public abstract double apply(double op1, double op2);
+}
 ```
 
+Ejemplo de como usarlo
 
+```` java
+Operation myOperation = Operation.ADD;
+System.out.println(myOperation.apply(2, 3)); // 5
+for(Operation op : Operation.values()) {
+    System.out.println(op.apply(4, 2)); // 6  2  8  2
+}
+````
 
 ## Interfaces
 
-Los metodos de las interfaces son todos abstractos y publicos
+En general los metodos de las interfaces son *abstractos* y *publicos* salvo que se los declare *default* y se provea una implementacion
 
 Hay herencia multiple de interfaces ya que no tienen estado interno
 
 Para que una clase implemente una interfaz:
-``` java
+
+```java
 public class myClass implements myInterface {
-    ...
+    // ...
 }
 ```
 
@@ -200,10 +210,10 @@ public class myClass implements myInterface {
 ## Clase abstracta vs interfaz
 [video: Abstract classes](https://www.youtube.com/watch?v=HvPlEJ3LHgE)
 
-| Clase abstracta                                          | interfaz                                                                                                              |
-|----------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
-| Tiene que ver con el comportamiento principal del objeto | Comportamiento que van a usar varias clases que no tienen nada que ver. Tiene que ver con un comportamiento adicional |
-
+| Clase abstracta                                                        | interfaz                                                                                                              |
+|------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
+| Tiene que ver con el comportamiento principal del objeto y la herencia | Comportamiento que van a usar varias clases que no tienen nada que ver. Tiene que ver con un comportamiento adicional |
+| Puede tener atributos                                                  | **No** tiene atributos                                                                                                |
 
 
 ## Tipos genericos
@@ -232,7 +242,8 @@ public class Date implements Comparable<? super Date> {
 ```
 
 Como crear un array de tipos genericos
-```java
+``` java
+@SuppressWarnings("unchecked")
 T[] myArray = (T[]) new Object[INITIAL_DIM];
 ```
 
@@ -275,12 +286,12 @@ Interfaz funcional que tiene la funcion **compare()**
 
 Ejemplo de implementacion:
 
-``` java
+```java
 public class myComparator implements Comparator<T> {
-    ...
+    // ...
     @Override
     public int compare(T o1, T o2) {
-        ...
+        // ...
     }
     
 }

@@ -12,6 +12,8 @@ public class OperationTester {
         for(ExtendedOperation operation : ExtendedOperation.values()) {
             System.out.printf("%.2f %s %.2f = %.2f\n", x, operation, y, operation.apply(x,y));
         }
+        BasicOperation op = BasicOperation.SUM;
+        System.out.println(op.apply(2, 3));
     }
 
 }
