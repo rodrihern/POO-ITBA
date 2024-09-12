@@ -1,5 +1,3 @@
-agregar como hacer arrays de tipos genericos
-
 TODO:
-* terminar guia iterable e iterator
+* hacer el modelo de parcial de la catedra
 * hacer muchos parciales

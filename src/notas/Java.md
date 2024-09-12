@@ -119,11 +119,20 @@ try {
 
 Uno puede crear sus propias excepciones extendiendo a Exception o RuntimeException
 
-siempre debe invocarse un metodo que lance <b>checked</b> exceptions
-dentro de un bloque try-catch. Si en un programa de prueba aparece 
-un metodo que lanza excepcion fuera de un bloque try-catch,
-esa es una **unchecked** exception.
+| Checked                                                                   | Unchecked                         |
+|---------------------------------------------------------------------------|-----------------------------------|
+| Debe estar dentro de un bloque try-catch o declarar que le haces un throw | No hace falta hacer nada especial |
+| Extiende a Exception                                                      | Extiende a RunTimeException       |
 
+Para crear tu propia exception
+````java
+public class myException extends RuntimeException {
+    private static final String MESSAGE = "Pasaron cosas";
+    public myException() {
+        super(MESSAGE);
+    }
+}
+````
 
 
 
@@ -135,37 +144,6 @@ Como toda clase, puede tener metodos y atributos
 
 Son constantes que podemos tratar como objetos
 
-Ejemplo:
-
-``` java
-public enum Rating {
-  SUCCESS("Success", 10),
-  GOOD("Good", 7),
-  REGULAR("Regular", 5),
-  BAD("Bad", 2);
-
-  private final String description;
-  private final int value;
-
-  Rating(String description, int value){
-      this.description = description;
-      this.value = value;
-  }
-
-  @Override
-  public String toString() {
-      return description;
-  }
-
-  public int intValue() {
-      return value;
-  }
-}
-```
-
-En este caso crea una instancia para success, una sola para good, etc,<br/>
-en total se harian cuatro instancias.
-
 Nadie de afuera puede llamar al constructor mas que la jvm
 
 Algunos metodos de clase:
@@ -173,12 +151,10 @@ Algunos metodos de clase:
 * valueOf
 * values
 
-Se pueden dar metodos abstractos a cada una de las instancias
-
 se busca que los enum tengan el mayor comportamiento posible
 
 Ejemplo:
-``` java
+```java
 public enum Operation {
    ADD("+") {
        @Override
@@ -186,7 +162,7 @@ public enum Operation {
            return op1 + op2;
        }
    },
-   SUBTRACT("-") { ... }, MULTIPLY("*") { ... }, DIVIDE("/") { ... };
+   SUBTRACT("-") { /* ... */ }, MULTIPLY("*") { /* ... */ }, DIVIDE("/") { /* ... */ };
 
    private final String symbol;
 
@@ -194,9 +170,7 @@ public enum Operation {
 
    public abstract double apply(double op1, double op2);
 
-   public static double evaluate(String op1, String op2, String op) {
-       double n1 = Double.parseDouble(op1); 
-       double n2 = Double.parseDouble(op2);
+   public static double evaluate(double op1, double op2, String op) {
        for (Operation instance : values()) {
            if (instance.symbol.equals(op)) {
                return instance.apply(n1, n2);
@@ -217,7 +191,7 @@ Hay herencia multiple de interfaces ya que no tienen estado interno
 
 Para que una clase implemente una interfaz:
 ``` java
-public class Date implements ObjectToCsv {
+public class myClass implements myInterface {
     ...
 }
 ```
@@ -240,20 +214,26 @@ public class Date implements ObjectToCsv {
 * Permiten escribir código reusable por objetos de distinto tipo
 
 Como declarar una interfaz con generics
-``` java
+```java
 public interface Comparable<T> {
    int compareTo(T other);
 }
 ```
+
 Como implementarla en una clase
-``` java
+```java
 public class Date implements Comparable<? super Date> {
-    ...
+    // ... 
     @Override
     public int compareTo(Date d) {
-        ...
+        // ... 
     }
 }
+```
+
+Como crear un array de tipos genericos
+```java
+T[] myArray = (T[]) new Object[INITIAL_DIM];
 ```
 
 
@@ -263,7 +243,7 @@ Es una interfaz que tiene un solo metodo abstracto, (puede tener mas defaults pe
 
 Ejemplo
 
-``` java
+```java
 @FunctionalInterface
 public interface Operation {
     double apply(double n1, double n2);
@@ -272,15 +252,18 @@ public interface Operation {
 
 ### Comparable
 
-Una clase que implemente comparable tiene que definir un compareTo()
+Una clase que implemente comparable tiene un metodo de instancia *compareTo(other)* que devuelve:
+* **0** si son iguales
+* **Negativo** si es menor que el otro
+* **Positivo** si es mayor que el otro
 
 Ejemplo:
 
 ``` java
-public class Date implements Comparable<Date> {
+public class myClass<T> implements Comparable<T> {
     ...
     @Override
-    public int compareTo(Date otherDate) {
+    public int compareTo(T other) {
         ...
     }
 }
@@ -288,15 +271,15 @@ public class Date implements Comparable<Date> {
 
 ### Comparator
 
-Es una interfaz funcional que tiene la funcion compare
+Interfaz funcional que tiene la funcion **compare()**
 
 Ejemplo de implementacion:
 
 ``` java
-public class DateComparator implements Comparator<Date> {
+public class myComparator implements Comparator<T> {
     ...
     @Override
-    public int compare(Date d1, Date d2) {
+    public int compare(T o1, T o2) {
         ...
     }
     
@@ -313,21 +296,25 @@ donde myArray es un array que implementa Comparable
 
 ### Function
 
-``` java
+Interfaz funcional que tiene el metodo **apply()**
+
+```java
 @FunctionalInterface
 public interface Function<T, R> {
     R apply(T t);
-	...
+    // ...
 }
 ```
 
 ### Predicate
 
-``` java
+Interfaz funcional que tiene el metodo **test()**
+
+```java
 @FunctionalInterface
 public interface Predicate<T, R> {
     boolean test(T t);
-	...
+    // ...
 }
 ```
 
@@ -349,6 +336,35 @@ Sirve para pasar como parametro una interfaz funcional sin la necesidad de decla
 
 ### Iterable e iterator
 
+Una clase iterable tiene un metodo **iterator()** que devuelve un iterador de dicha clase
+
+Un iterador tiene los metodos **next()** y **hasNext()**
+
+Una coleccion que implementa iterable permite hacerle un for-each
+
+Ejemplo:
+
+````java
+import java.util.Iterator;
+
+public class myIterableClass<T> implements Iterable<T> {
+    // ...
+    @Override
+    public Iterator<T> iterator() {
+        return new Iterator<>() {
+            @Override
+            public boolean hasNext() {
+                // ...
+            }
+
+            @Override
+            public T next() {
+                // ...
+            }
+        };
+    }
+}
+````
 
 
 
