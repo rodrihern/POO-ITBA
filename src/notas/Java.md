@@ -97,7 +97,7 @@ Usar **StringBuilder** para concatenaciones usando .append() *especialmente en *
 StringBuilder str = new StringBuilder();
 String[] words = new String[]{"hola", "que", "tal"};
 for(String word : words) {
-    str.append(word + " ");
+    str.append(word).append(" ");
 }
 System.out.println(str.toString()); // hola que tal 
 
