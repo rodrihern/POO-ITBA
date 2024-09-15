@@ -357,6 +357,7 @@ Ejemplo:
 
 ````java
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class myIterableClass<T> implements Iterable<T> {
     // ...
@@ -370,6 +371,9 @@ public class myIterableClass<T> implements Iterable<T> {
 
             @Override
             public T next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
                 // ...
             }
         };
