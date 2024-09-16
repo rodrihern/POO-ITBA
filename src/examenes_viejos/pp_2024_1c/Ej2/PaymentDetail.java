@@ -1,4 +1,4 @@
-package examenes_viejos.pp_2024_1q.Ej2;
+package examenes_viejos.pp_2024_1c.Ej2;
 
 public class PaymentDetail {
     private final int installment;

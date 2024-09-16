@@ -85,6 +85,12 @@ private void resize() {
 }
 ```
 
+Como remover un elemento en la posicion i del array
+```` java
+System.arraycopy(myArr, i + 1, enrolled, i, dim - 1 - i);
+// (src, srcIdx, dest, destIdx, size)
+````
+
 ## Strings
 
 [video: Why strings are inmutable](https://www.youtube.com/watch?v=Bj9Mx_Lx3q4&list=PLkeaG1zpPTHhXOfy-mFbdqd1Zz4GnjcpC&index=34)

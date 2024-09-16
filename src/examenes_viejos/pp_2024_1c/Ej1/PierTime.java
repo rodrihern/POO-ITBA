@@ -1,4 +1,4 @@
-package examenes_viejos.pp_2024_1q.Ej1;
+package examenes_viejos.pp_2024_1c.Ej1;
 
 import java.time.LocalTime;
 

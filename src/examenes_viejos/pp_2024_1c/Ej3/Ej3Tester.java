@@ -1,4 +1,4 @@
-package examenes_viejos.pp_2024_1q.Ej3;
+package examenes_viejos.pp_2024_1c.Ej3;
 
 import java.util.function.Predicate;
 
