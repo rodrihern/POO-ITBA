@@ -87,8 +87,9 @@ private void resize() {
 
 Como remover un elemento en la posicion i del array
 ```` java
-System.arraycopy(myArr, i + 1, enrolled, i, dim - 1 - i);
+System.arraycopy(myArr, i + 1, myArr, i, dim - 1 - i);
 // (src, srcIdx, dest, destIdx, size)
+// el size es de lo que estoy pegando
 ````
 
 ## Strings
