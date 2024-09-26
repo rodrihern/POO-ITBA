@@ -390,7 +390,38 @@ public class myIterableClass<T> implements Iterable<T> {
 
 ## Collections
 
-Collections es una interfaz que tiene los siquientes metodos:
+Collections es una interfaz que extiende a iterable y tiene los siguientes metodos:
+````java
+int size();
+boolean isEmpty();
+boolean contains(Object o);
+Object[] toArray();
+<T> T[] toArray(T[] a);
+boolean add(E e);
+boolean remove(Object o);
+boolean containsAll(Collection<?> c);
+boolean addAll(Collection<? extends E> c); // Unión
+boolean retainAll(Collection<?> c); // Intersección
+boolean removeAll(Collection<?> c); // Resta
+void clear();
+````
+
+### Fotito del resumen
+
+
+### ArrayLst
+
+Implementa *SequencedCollection* con un array
+
+### HashSet
+
+Implementa una tabla de hash que no tiene orden. osea una especie de vector de listas / vector de arboles
+
+sirve para que la busqueda en sets muy grandes sea casi O(1) en la practica
+
+Aunque el peor caso cae en O(n) o O(log n)
+
+### TreeSet
 
 
 
