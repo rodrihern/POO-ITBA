@@ -388,5 +388,9 @@ public class myIterableClass<T> implements Iterable<T> {
 }
 ````
 
+## Collections
+
+Collections es una interfaz que tiene los siquientes metodos:
+
 
 
