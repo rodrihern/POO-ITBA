@@ -406,22 +406,26 @@ boolean removeAll(Collection<?> c); // Resta
 void clear();
 ````
 
-### Fotito del resumen
+Diagrama de interfaces e implementaciones de collections:
+
+![Diagrama](./Imgs/resumen_collections.png)
 
 
-### ArrayLst
 
-Implementa *SequencedCollection* con un array
+### ArrayList
+
+Bueno si uno necesita mucho random access
 
 ### HashSet
 
-Implementa una tabla de hash que no tiene orden. osea una especie de vector de listas / vector de arboles
+Implementa una *tabla de hash* que no tiene orden ni elementos repetidos. 
+Osea una especie de vector de listas / vector de arboles
 
-sirve para que la busqueda en sets muy grandes sea casi O(1) en la practica
-
-Aunque el peor caso cae en O(n) o O(log n)
+Sirve para que la busqueda en sets **muy grandes** sea casi O(1) en la practica,
+Aunque el peor caso puede caer en O(log n) o incluso O(n)
 
 ### TreeSet
 
+Es el unico *SortedSet* que vemos asi que si necesito un set ordenado, no hay otra alternativa
 
 
