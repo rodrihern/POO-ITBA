@@ -1,10 +1,5 @@
-Collection es una interfaz
-ArrayList es una implementacion de Collection con un array con un fla de esteroides
-con un iterador no puedo remover elementos mientras recorro, tengo que usar el removeIf
-el removeIf si puede porque llama al remove del propio iterator
 
 
 TODO:
-ver un toque mas claro lo de innerclass y la visibilidad que tiene
-ver bien el sorted set como el arbol treeset
-ver videos y armar el marcdown
+* Ver algun videito de collections y ponerlos en el marcdown
+* Hacer hasta donde se pueda de la guia 6

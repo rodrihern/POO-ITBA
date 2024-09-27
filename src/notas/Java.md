@@ -410,6 +410,8 @@ Diagrama de interfaces e implementaciones de collections:
 
 ![Diagrama](./Imgs/resumen_collections.png)
 
+Tener en cuenta que si quiero remover elementos desde un iterador, debo llamar al remove del iterador.
+Sino otra alternativa es usar el removeIf(Predicate) en las colecciones que lo implementen
 
 
 ### ArrayList
