@@ -16,7 +16,19 @@ public abstract class BoardingFlight {
         return passengers.add(new Passenger(name, row, category));
     }
 
-    public Iterator<Passenger> boardingCallIterator() {
-        return passengers.iterator();
+    public Iterator<String> boardingCallIterator() {
+        return new Iterator<String>() {
+            private Iterator<Passenger> it = passengers.iterator();
+
+            @Override
+            public boolean hasNext() {
+                return it.hasNext();
+            }
+
+            @Override
+            public String next() {
+                return it.next().toString();
+            }
+        };
     }
 }

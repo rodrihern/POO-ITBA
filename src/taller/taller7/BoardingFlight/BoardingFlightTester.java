@@ -17,7 +17,7 @@ public class BoardingFlightTester {
         rowBoardingFlight.addForBoarding("Passenger 2", 5, PassengerCategory.RUBY);
         rowBoardingFlight.addForBoarding("Passenger 1", 15, PassengerCategory.ECONOMY);
         rowBoardingFlight.addForBoarding("Passenger 4", 5, PassengerCategory.EMERALD);
-        Iterator<Passenger> rowIterator = rowBoardingFlight.boardingCallIterator();
+        Iterator<String> rowIterator = rowBoardingFlight.boardingCallIterator();
         while(rowIterator.hasNext()) {
             System.out.println(rowIterator.next());
         }
@@ -32,7 +32,7 @@ public class BoardingFlightTester {
         categoryBoardingFlight.addForBoarding("Passenger 2", 5, PassengerCategory.RUBY);
         categoryBoardingFlight.addForBoarding("Passenger 1", 15, PassengerCategory.ECONOMY);
         categoryBoardingFlight.addForBoarding("Passenger 4", 5, PassengerCategory.EMERALD);
-        Iterator<Passenger> categoryIterator = categoryBoardingFlight.boardingCallIterator();
+        Iterator<String> categoryIterator = categoryBoardingFlight.boardingCallIterator();
         while(categoryIterator.hasNext()) {
             System.out.println(categoryIterator.next());
         }
