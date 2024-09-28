@@ -1,14 +1,13 @@
 package taller.taller4;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
-public class ArrayList<T> implements List<T> {
+public class MyArrayList<T> implements List<T> {
     private T[] array;
     private int dim;
     private static final int DEFAULT_SIZE = 10;
 
-    public ArrayList() {
+    public MyArrayList() {
         array = (T[]) new Object[DEFAULT_SIZE];
         dim = 0;
     }
