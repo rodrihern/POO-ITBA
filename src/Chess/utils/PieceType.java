@@ -22,7 +22,7 @@ public enum PieceType {
         public Direction canMove(Color color, Square from, Square to) {
             int rowInc = to.getRow() - from.getRow();
             int colInc = to.getCol() - from.getCol();
-            if(Math.abs(rowInc) + Math.abs(colInc) == 3) { // the only way si that one is 2 and the other one is 1
+            if((Math.abs(rowInc) == 2 && Math.abs(colInc) == 1) || (Math.abs(rowInc) == 1 && Math.abs(colInc) == 2)) {
                 return Direction.UP; // return no null, it could be any direction
             }
             return null;
