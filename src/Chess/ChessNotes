@@ -1,0 +1,7 @@
+TODO:
+* ver como hacer las piezas enums
+* el can move retorna la direccion en la que se movio
+* hacer las clases Move y Square
+* hacer el enum de direcciones
+* que el board tenga lo de checkNothingInTheWay()
+* hacer el uml

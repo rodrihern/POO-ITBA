@@ -58,5 +58,8 @@ public abstract class Piece {
         return false;
     }
 
-
+    @Override
+    public String toString() {
+        return "*";
+    }
 }

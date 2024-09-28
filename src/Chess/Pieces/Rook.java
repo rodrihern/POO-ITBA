@@ -26,4 +26,9 @@ public class Rook extends Piece {
         }
         super.moveTo(row, col);
     }
+
+    @Override
+    public String toString() {
+        return isWhite() ? "R" : "r";
+    }
 }

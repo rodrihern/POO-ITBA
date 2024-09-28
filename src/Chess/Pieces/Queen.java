@@ -22,4 +22,9 @@ public class Queen extends Piece{
             throw new IllegalArgumentException();
         }
     }
+
+    @Override
+    public String toString() {
+        return isWhite() ? "Q" : "q";
+    }
 }
