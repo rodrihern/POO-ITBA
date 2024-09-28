@@ -1,7 +1,28 @@
+si una cordenada es cr
+i = '8'-r
+c = c - 'a'
+osea si es b2 -> i = 6, j = 1
+
+
+cuando haga el isValid de Board recordar chequear:
+    * los checks
+    * los checkmates
+    * los stalemates
+    * los enpassant
+    * que no haya nada en el medio cuando voy a hacer un movimiento
+
+Para game agregar los comandos:
+    * /draw
+    * /resign
+    * /undo
+    * /toggleCoordenates
+    * /flipBoard (al final)
+
+Los inputs de movimiento van a ser del tipo "Nb1-c3"
+
 TODO:
-* ver como hacer las piezas enums
-* el can move retorna la direccion en la que se movio
-* hacer las clases Move y Square
-* hacer el enum de direcciones
-* que el board tenga lo de checkNothingInTheWay()
-* hacer el uml
+* Piece
+* Move
+* Board y BoardTester
+* Game
+* Readme

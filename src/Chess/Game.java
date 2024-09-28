@@ -5,6 +5,10 @@ import Chess.Pieces.Piece;
 public class Game {
     public static void main(String[] args) {
         Board board = new Board();
+        printBoard(board);
+    }
+
+    private static void printBoard(Board board) {
         int count = 0;
         for(Piece p : board) {
             if(p == null) {

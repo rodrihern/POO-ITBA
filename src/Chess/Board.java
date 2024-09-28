@@ -1,8 +1,8 @@
 package Chess;
 
-import Chess.Pieces.Bishop;
 import Chess.Pieces.Piece;
 import Chess.Pieces.Rook;
+import Chess.utils.Color;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -10,12 +10,7 @@ import java.util.NoSuchElementException;
 public class Board implements Iterable<Piece> {
 
     private Piece[][] board = new Piece[8][8];
-    /*
-    * si una cordenada es cr
-    * i = 8-r
-    * c = c - 'a'
-    * osea si es b2 -> i = 6, j = 1
-    * */
+
     public Board() {
         board[0][0] = new Rook(Color.BLACK, 0, 0);
         board[0][7] = new Rook(Color.BLACK, 0, 7);
