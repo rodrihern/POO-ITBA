@@ -17,6 +17,14 @@ public enum Direction {
         this.colInc = colInc;
     }
 
+    public static Direction[] diagonal() {
+        return new Direction[]{Direction.UPLEFT, Direction.UPRIGHT, Direction.DOWNLEFT,  Direction.DOWNRIGHT};
+    }
+
+    public static Direction[] straight() {
+        return  new Direction[]{Direction.UP, Direction.DOWN, Direction.LEFT, Direction.RIGHT};
+    }
+
     public int getRowInc() {
         return rowInc;
     }

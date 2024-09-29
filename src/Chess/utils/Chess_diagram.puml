@@ -1,17 +1,17 @@
 @startuml
 
 
-interface Iterable {
-    Iterator<Piece> iterator()
-}
-
 class Board {
-    -Piece[][] board
-    -Move lastMove
-    -Move prevLastMove
+    -Piece[][] board, prev
+    -Piece whiteKing, blackKing
+    +String toString()
     +void makeMove(Move newMove)
     +void undo()
     -boolean isValid(Move move)
+    -canMakeMove(Piece piece, Square to)
+    -isPathClear(Square from, Square to)
+    -isUnderAttack(Piece piece)
+    -Piece[][] getBoardCopy()
 }
 
 class Piece {
@@ -19,17 +19,20 @@ class Piece {
     -Color color
     -Square sq
     +Piece(PieceType type, Color color, Square sq)
+    +PieceType getType()
+    +Color getColor()
+    +Square getSquare()
     +boolean equals(Object o)
     +String toString()
-    +boolean canMoveTo(Square sq)
-    +void moveTo(Square sq)
+    +Direction canMoveTo(Square dest)
+    +void moveTo(Square dest)
 }
 
 class Move {
     -Piece piece
-    -Square from
-    -Square to
+    -Square dest
     +Move(String move, Color color)
+    +Move(Piece piece, Square dest)
     +Piece getPiece()
     +Square getFrom()
     +Square getTo()
@@ -50,7 +53,8 @@ enum Color {
 }
 
 enum Direction {
-    +UP, DOWN, LEFT, RIGHT, UPRIGHT, UPLEFT, DOWNRIGHT, DOWNLEFT
+    +UP, DOWN, LEFT, RIGHT, UPRIGHT, UPLEFT,
+    DOWNRIGHT, DOWNLEFT
     +int rowInc()
     +int colInc()
 }
@@ -65,10 +69,9 @@ Board *- Move
 Move *- Square
 Move *-- Piece
 Board *- Piece
-Iterable <|.. Board
 Piece *- Square
-PieceType -* Piece
+Piece *-- PieceType
 Piece *-- Direction
-Piece *-- Color
+Color -* Piece
 
 @enduml

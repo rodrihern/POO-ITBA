@@ -6,23 +6,24 @@ osea si es b2 -> i = 6, j = 1
 
 cuando haga el isValid de Board recordar chequear:
     * los checks
+    * los enpassant
+    (y mas adelante)
     * los checkmates
     * los stalemates
-    * los enpassant
-    * que no haya nada en el medio cuando voy a hacer un movimiento
+
 
 Para game agregar los comandos:
     * /draw
     * /resign
     * /undo
     * /toggleCoordenates
-    * /flipBoard (al final)
+    (y mas adelante)
+    * /flipBoard
 
 Los inputs de movimiento van a ser del tipo "Nb1-c3"
 
 TODO:
-* Piece
-* Move
+* Hablar con Franco
 * Board y BoardTester
 * Game
 * Readme

@@ -15,8 +15,8 @@ public enum PieceType {
         }
     },
     QUEEN("Q", Direction.values()),
-    BISHOP("B", new Direction[]{Direction.UPLEFT, Direction.UPRIGHT, Direction.DOWNLEFT,  Direction.DOWNRIGHT}),
-    ROOK("R", new Direction[]{Direction.UP, Direction.DOWN, Direction.LEFT, Direction.RIGHT}),
+    BISHOP("B", Direction.diagonal()),
+    ROOK("R", Direction.straight()),
     KNIGHT("N", null) {
         @Override
         public Direction canMove(Color color, Square from, Square to) {
@@ -33,6 +33,7 @@ public enum PieceType {
         public Direction canMove(Color color, Square from, Square to) {
             int rowInc = to.getRow() - from.getRow();
             int colInc = to.getCol() - from.getCol();
+            // the first time a pawn moves it can move 2 squares
             if(color.equals(Color.WHITE)) {
                 if(rowInc == -2 && to.getRow() == 6) {
                     return colInc == 0 ? Direction.UP : null;
@@ -56,6 +57,7 @@ public enum PieceType {
         }
     };
 
+    private static final int DIM = 8;
     private final String value;
     private final Direction[] directions;
 
@@ -73,7 +75,7 @@ public enum PieceType {
         for(Direction dir : directions) {
             int i = from.getRow() + dir.getRowInc();
             int j = from.getCol() + dir.getColInc();
-            while (0 <= i && i <= 7 && 0<= j && j <= 7) {
+            while (0 <= i && i < DIM && 0<= j && j < DIM) {
                 if(to.equals(new Square(i, j))) {
                     return dir;
                 }

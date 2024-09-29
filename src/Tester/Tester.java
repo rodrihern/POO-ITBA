@@ -4,10 +4,9 @@ import java.util.Arrays;
 
 public class Tester {
     public static void main(String[] args) {
-        State st = new State();
-        myClass c = new myClass(st);
+        myClass c = new myClass();
         System.out.println(c.getOtherClassState());
-        st.setState(false);
+        c.getSt().setState(false);
         System.out.println(c.getOtherClassState());
     }
 

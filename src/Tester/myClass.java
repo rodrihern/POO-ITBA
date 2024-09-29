@@ -2,10 +2,10 @@ package Tester;
 
 public class myClass {
 
-    private final State st;
+    private final State st = new State();
 
-    public myClass(State st) {
-        this.st = st;
+    public State getSt() {
+        return st;
     }
 
     public boolean getOtherClassState() {

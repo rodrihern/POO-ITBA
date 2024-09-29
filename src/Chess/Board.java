@@ -1,46 +1,28 @@
 package Chess;
 
-import Chess.Pieces.Piece;
-import Chess.Pieces.Rook;
 import Chess.utils.Color;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class Board implements Iterable<Piece> {
+public class Board {
 
-    private Piece[][] board = new Piece[8][8];
-
-    public Board() {
-        board[0][0] = new Rook(Color.BLACK, 0, 0);
-        board[0][7] = new Rook(Color.BLACK, 0, 7);
-        board[7][0] = new Rook(Color.WHITE, 7, 0);
-        board[7][7] = new Rook(Color.WHITE, 7, 7);
-    }
+    private static final int DIM = 8;
+    private Piece[][] board = new Piece[DIM][DIM];
 
     @Override
-    public Iterator<Piece> iterator() {
-        return new Iterator<>() {
-            int i = 0, j = 0;
-            @Override
-            public boolean hasNext() {
-                return i <= 7;
+    public String toString() {
+        StringBuilder str = new StringBuilder();
+        for(int i = 0; i < DIM; i++) {
+            for(int j = 0; j < DIM; j++) {
+                String toAppend = board[i][j] == null ? "." : board[i][j].toString();
+                str.append(toAppend).append("  ");
             }
+            str.append("\n");
+        }
 
-            @Override
-            public Piece next() {
-                if(!hasNext()) {
-                    throw new NoSuchElementException();
-                }
-                Piece ans = board[i][j];
-                if(j == 7) {
-                    i++;
-                    j = 0;
-                } else {
-                    j++;
-                }
-                return ans;
-            }
-        };
+        return str.toString();
     }
+
+
 }
