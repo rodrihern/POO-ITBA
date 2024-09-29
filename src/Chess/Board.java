@@ -55,9 +55,32 @@ public class Board {
         return str.toString();
     }
 
-    private boolean canMakeMove(Piece piece, Square from, Square to) {
-        // terminar
-        return false;
+    private boolean canMakeMove(Square from, Square to) {
+        int i = from.getRow();
+        int j = from.getCol();
+        Piece piece = board[i][j];
+        // check that there is no piece of the same color in to
+        if(piece.getColor().equals(board[to.getRow()][to.getCol()].getColor())) {
+            return false;
+        }
+        // check that the piece can move to that square
+        Direction dir = piece.canMove(from, to);
+        if(dir == null) {
+            return false;
+        }
+        // check that there is nothing in the way
+        i += dir.getRowInc();
+        j += dir.getColInc();
+        while(i != to.getRow() && j != to.getCol() && 0 <= i && i < DIM && 0 <= j && j < DIM) {
+            // si estan las cosas bien hechas no haria falta validar lo de los limites
+            // si lo tengo andando ver de sacarlo
+            if(board[i][j] != null) {
+                return false;
+            }
+            i += dir.getRowInc();
+            j += dir.getColInc();
+        }
+        return true;
     }
 
     private boolean isUnderAttack(Square sq) {

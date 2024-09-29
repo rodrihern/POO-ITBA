@@ -8,7 +8,7 @@ class Board {
     +void makeMove(Move newMove)
     +void undo()
     -boolean isValid(Move move)
-    -canMakeMove(Piece piece, Square from, Square to)
+    -canMakeMove(Square from, Square to)
     -isUnderAttack(Piece piece, Square sq)
     -pieceInDir(Square sq, Direction dir)
     -Piece[][] boardCopy()
