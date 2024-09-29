@@ -3,34 +3,32 @@
 
 class Board {
     -Piece[][] board, prev
-    -Piece whiteKing, blackKing
+    -Square whiteKing, blackKing
     +String toString()
     +void makeMove(Move newMove)
     +void undo()
     -boolean isValid(Move move)
-    -canMakeMove(Piece piece, Square to)
+    -canMakeMove(Piece piece, Square from, Square to)
     -isPathClear(Square from, Square to)
-    -isUnderAttack(Piece piece)
+    -isUnderAttack(Piece piece, Square sq)
     -Piece[][] getBoardCopy()
 }
 
 class Piece {
     -PieceType type
     -Color color
-    -Square sq
-    +Piece(PieceType type, Color color, Square sq)
+    +Piece(Color color, PieceType type)
     +PieceType getType()
     +Color getColor()
-    +Square getSquare()
     +boolean equals(Object o)
     +String toString()
     +Direction canMoveTo(Square dest)
-    +void moveTo(Square dest)
 }
 
 class Move {
     -Piece piece
-    -Square dest
+    -Square from
+    -Square to
     +Move(String move, Color color)
     +Move(Piece piece, Square dest)
     +Piece getPiece()
@@ -66,12 +64,12 @@ enum PieceType {
 }
 
 Board *- Move
+Board *-- Square
 Move *- Square
-Move *-- Piece
-Board *- Piece
-Piece *- Square
+Piece *- Move
+Board *-- Piece
 Piece *-- PieceType
-Piece *-- Direction
+PieceType *- Direction
 Color -* Piece
 
 @enduml

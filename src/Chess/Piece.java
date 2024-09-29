@@ -10,12 +10,10 @@ import java.util.Objects;
 public class Piece {
     private final PieceType type;
     private final Color color;
-    Square sq;
 
-    public Piece(PieceType type, Color color, Square sq) {
+    public Piece(Color color, PieceType type) {
         this.type = type;
         this.color = color;
-        this.sq = sq;
     }
 
     public PieceType getType() {
@@ -26,21 +24,14 @@ public class Piece {
         return color;
     }
 
-    public Square getSquare() {
-        return sq;
-    }
-
     @Override
     public boolean equals(Object obj) {
-        return obj instanceof Piece p &&
-                this.type == p.type &&
-                this.color == p.color &&
-                this.sq == p.sq;
+        return obj instanceof Piece p && this.type.equals(p.type)&& this.color.equals(p.color);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(type, color, sq);
+        return Objects.hash(type, color);
     }
 
     @Override
@@ -48,11 +39,8 @@ public class Piece {
         return color == Color.WHITE ? type.toString() : type.toString().toLowerCase();
     }
 
-    public Direction canMoveTo(Square dest) {
-        return type.canMove(color, sq, dest);
+    public Direction canMoveTo(Square from, Square to) {
+        return type.canMove(color, from, to);
     }
 
-    public void moveTo(Square sq) {
-        this.sq = sq;
-    }
 }

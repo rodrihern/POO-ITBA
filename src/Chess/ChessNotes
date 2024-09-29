@@ -23,6 +23,8 @@ Para game agregar los comandos:
 Los inputs de movimiento van a ser del tipo "Nb1-c3"
 
 TODO:
+* sacarle a piece el hecho de que sepa donde esta
+* volver a agregar from y to a Move
 * Hablar con Franco
 * Board y BoardTester
 * Game
