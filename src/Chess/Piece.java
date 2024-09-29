@@ -39,7 +39,7 @@ public class Piece {
         return color == Color.WHITE ? type.toString() : type.toString().toLowerCase();
     }
 
-    public Direction canMoveTo(Square from, Square to) {
+    public Direction canMove(Square from, Square to) {
         return type.canMove(color, from, to);
     }
 

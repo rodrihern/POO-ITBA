@@ -1,11 +1,11 @@
 package Chess;
 
 import Chess.utils.Color;
+import Chess.utils.Direction;
 import Chess.utils.PieceType;
 import Chess.utils.Square;
 
-import java.util.Iterator;
-import java.util.NoSuchElementException;
+import java.util.Arrays;
 
 public class Board {
 
@@ -42,7 +42,6 @@ public class Board {
 
     }
 
-
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
@@ -53,8 +52,48 @@ public class Board {
             }
             str.append("\n");
         }
-
         return str.toString();
+    }
+
+    private boolean canMakeMove(Piece piece, Square from, Square to) {
+        // terminar
+        return false;
+    }
+
+    private boolean isUnderAttack(Square sq) {
+        Piece p = board[sq.getRow()][sq.getCol()];
+        if(p == null) {
+            return false;
+        }
+        for(Direction dir : Direction.values()) {
+            Square otherSq = pieceSqInDir(sq, dir);
+            if(otherSq != null) {
+                Piece otherPiece = board[otherSq.getRow()][otherSq.getCol()];
+                if(!otherPiece.getColor().equals(p.getColor()) && otherPiece.canMove(otherSq, sq) != null) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private Square pieceSqInDir(Square sq, Direction dir) {
+        int i = sq.getRow() + dir.getRowInc();
+        int j = sq.getCol() + dir.getColInc();
+        while(0 <= i && i < DIM && 0 <= j && j < DIM) {
+            if(board[i][j] != null) {
+                return new Square(i, j);
+            }
+        }
+        return null;
+    }
+
+    private Piece[][] boardCopy() {
+        Piece[][] ans = new Piece[DIM][DIM];
+        for(int i = 0; i < DIM; i++) {
+            ans[i] = Arrays.copyOf(board[i], DIM);
+        }
+        return ans;
     }
 
 

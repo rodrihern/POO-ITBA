@@ -9,9 +9,9 @@ class Board {
     +void undo()
     -boolean isValid(Move move)
     -canMakeMove(Piece piece, Square from, Square to)
-    -isPathClear(Square from, Square to)
     -isUnderAttack(Piece piece, Square sq)
-    -Piece[][] getBoardCopy()
+    -pieceInDir(Square sq, Direction dir)
+    -Piece[][] boardCopy()
 }
 
 class Piece {
