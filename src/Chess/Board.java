@@ -5,6 +5,7 @@ import Chess.utils.Direction;
 import Chess.utils.PieceType;
 import Chess.utils.Square;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Board {
@@ -12,11 +13,13 @@ public class Board {
     private static final int DIM = 8;
     private Piece[][] board, prevBoard;
     private Square whiteKing, blackKing;
+    private ArrayList<Move> possiblEnpassants;
 
     public Board() {
         board = new Piece[DIM][DIM];
         whiteKing = new Square("e1");
         blackKing = new Square("e8");
+        possiblEnpassants = new ArrayList<>();
         // kings
         board[whiteKing.getRow()][whiteKing.getCol()] = new Piece(Color.WHITE, PieceType.KING);
         board[blackKing.getRow()][blackKing.getCol()] = new Piece(Color.BLACK, PieceType.KING);
@@ -59,8 +62,12 @@ public class Board {
         int i = from.getRow();
         int j = from.getCol();
         Piece piece = board[i][j];
+        if(piece == null) {
+            return false;
+        }
+        Piece dest = board[to.getRow()][to.getCol()];
         // check that there is no piece of the same color in to
-        if(piece.getColor().equals(board[to.getRow()][to.getCol()].getColor())) {
+        if(dest != null && piece.getColor().equals(dest.getColor())) {
             return false;
         }
         // check that the piece can move to that square
@@ -68,17 +75,23 @@ public class Board {
         if(dir == null) {
             return false;
         }
+        // check that if a pawn is moving diagonally it is taking
+        if(piece.getType().equals(PieceType.PAWN) && (dir.equals(Direction.UP) || dir.equals(Direction.DOWN))) {
+            return dest != null;
+        }
         // check that there is nothing in the way
-        i += dir.getRowInc();
-        j += dir.getColInc();
-        while(i != to.getRow() && j != to.getCol() && 0 <= i && i < DIM && 0 <= j && j < DIM) {
-            // si estan las cosas bien hechas no haria falta validar lo de los limites
-            // si lo tengo andando ver de sacarlo
-            if(board[i][j] != null) {
-                return false;
-            }
+        if(!piece.getType().equals(PieceType.KNIGHT)) {
             i += dir.getRowInc();
             j += dir.getColInc();
+            while(i != to.getRow() && j != to.getCol() && 0 <= i && i < DIM && 0 <= j && j < DIM) {
+                // si estan las cosas bien hechas no haria falta validar lo de los limites
+                // si lo tengo andando ver de sacarlo
+                if(board[i][j] != null) {
+                    return false;
+                }
+                i += dir.getRowInc();
+                j += dir.getColInc();
+            }
         }
         return true;
     }

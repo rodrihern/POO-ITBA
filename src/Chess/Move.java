@@ -4,6 +4,8 @@ import Chess.utils.Color;
 import Chess.utils.PieceType;
 import Chess.utils.Square;
 
+import java.util.Objects;
+
 public class Move {
     private final Piece piece;
     private final Square from, to;
@@ -42,5 +44,18 @@ public class Move {
 
     public Square getTo() {
         return to;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof Move m &&
+                this.piece.equals(m.piece) &&
+                this.from.equals(m.from) &&
+                this.to.equals(m.to);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(piece, from, to);
     }
 }

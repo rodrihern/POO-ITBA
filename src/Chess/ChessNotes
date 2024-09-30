@@ -4,13 +4,11 @@ c = c - 'a'
 osea si es b2 -> i = 6, j = 1
 
 
-cuando haga el isValid de Board recordar chequear:
-    * los checks
+cuando haga el isLegal de Board recordar chequear:
     * los enpassant
-    (y mas adelante)
-    * los checkmates
-    * los stalemates
+    * que no este mi king under attack
 
+para el make move recordar hacer bien el arraylist de enPassants
 
 Para game agregar los comandos:
     * /draw
@@ -23,7 +21,9 @@ Para game agregar los comandos:
 Los inputs de movimiento van a ser del tipo "Nb1-c3"
 
 TODO:
-* Hablar con Franco
-* Board y BoardTester
-* Game
-* Readme
+    - boolean hasLegalMoves(Color.color)
+    - boolean isLegal(Move move)
+    + void undo()
+    + void makeMove(Move newMove)
+    * Game
+    * Readme

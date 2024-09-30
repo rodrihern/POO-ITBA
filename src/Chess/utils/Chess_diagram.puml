@@ -4,10 +4,12 @@
 class Board {
     -Piece[][] board, prev
     -Square whiteKing, blackKing
+    -Move lastMove
     +String toString()
     +void makeMove(Move newMove)
     +void undo()
-    -boolean isValid(Move move)
+    -boolean hasLegalMoves(Color.color)
+    -boolean isLegal(Move move)
     -canMakeMove(Square from, Square to)
     -isUnderAttack(Piece piece, Square sq)
     -pieceInDir(Square sq, Direction dir)
