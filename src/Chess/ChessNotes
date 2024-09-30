@@ -29,5 +29,6 @@ TODO:
     + void undo()
     + void makeMove(Move newMove)
     * Tester
+    * ver si hago lo de la triple repeticion y como lo hago
     * Game
     * Readme
