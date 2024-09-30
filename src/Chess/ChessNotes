@@ -21,9 +21,13 @@ Para game agregar los comandos:
 Los inputs de movimiento van a ser del tipo "Nb1-c3"
 
 TODO:
-    - boolean hasLegalMoves(Color.color)
+    * Cambiar la funcion de canMove por una legalMoves que agregue a un set todos los Move que puede hacer
+
+
+    + boolean hasLegalMoves(Color.color)
     - boolean isLegal(Move move)
     + void undo()
     + void makeMove(Move newMove)
+    * Tester
     * Game
     * Readme

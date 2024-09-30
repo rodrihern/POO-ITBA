@@ -7,19 +7,22 @@ import Chess.utils.Square;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Board {
 
     private static final int DIM = 8;
     private Piece[][] board, prevBoard;
     private Square whiteKing, blackKing;
-    private ArrayList<Move> possiblEnpassants;
+    private ArrayList<Move> possibleEnpassants;
+
 
     public Board() {
         board = new Piece[DIM][DIM];
         whiteKing = new Square("e1");
         blackKing = new Square("e8");
-        possiblEnpassants = new ArrayList<>();
+        possibleEnpassants = new ArrayList<>();
         // kings
         board[whiteKing.getRow()][whiteKing.getCol()] = new Piece(Color.WHITE, PieceType.KING);
         board[blackKing.getRow()][blackKing.getCol()] = new Piece(Color.BLACK, PieceType.KING);
