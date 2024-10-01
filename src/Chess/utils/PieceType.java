@@ -1,17 +1,20 @@
 package Chess.utils;
 
+import Chess.Board;
+import Chess.Piece;
+
 public enum PieceType {
     KING("K", Direction.values()) {
         @Override
-        public Direction canMove(Color color, Square from, Square to) {
-            int rowInc = to.getRow() - from.getRow();
-            int colInc = to.getCol() - from.getCol();
-            for(Direction dir : getDirections()) {
-                if(rowInc == dir.getRowInc() && colInc == dir.getColInc()) {
-                    return dir;
-                }
+        public boolean canMove(Color color, Square from, Square to, Piece[][] board) {
+            int i = to.getRow();
+            int j = to.getCol();
+            int rowInc = i - from.getRow();
+            int colInc = j - from.getCol();
+            if(Math.abs(rowInc) > 1 || Math.abs(colInc) > 1 || (rowInc == 0 && colInc == 0)) {
+                return false;
             }
-            return null;
+            return board[i][j] == null || !board[i][j].getColor().equals(color);
         }
     },
     QUEEN("Q", Direction.values()),
@@ -19,45 +22,52 @@ public enum PieceType {
     ROOK("R", Direction.straight()),
     KNIGHT("N", null) {
         @Override
-        public Direction canMove(Color color, Square from, Square to) {
-            int rowInc = to.getRow() - from.getRow();
-            int colInc = to.getCol() - from.getCol();
+        public boolean canMove(Color color, Square from, Square to, Piece[][] board) {
+            int i = to.getRow();
+            int j = to.getCol();
+            int rowInc = i - from.getRow();
+            int colInc = j - from.getCol();
             if((Math.abs(rowInc) == 2 && Math.abs(colInc) == 1) || (Math.abs(rowInc) == 1 && Math.abs(colInc) == 2)) {
-                return Direction.UP; // return no null, it could be any direction
+                return board[i][j] == null || !board[i][j].getColor().equals(color);
             }
-            return null;
+            return false;
         }
     },
     PAWN("P", new Direction[]{Direction.UP, Direction.UPLEFT, Direction.UPRIGHT}) {
         @Override
-        public Direction canMove(Color color, Square from, Square to) {
-            int rowInc = to.getRow() - from.getRow();
-            int colInc = to.getCol() - from.getCol();
-            // the first time a pawn moves it can move 2 squares
-            if(color.equals(Color.WHITE)) {
-                if(rowInc == -2 && to.getRow() == 6) {
-                    return colInc == 0 ? Direction.UP : null;
-                }
-                for(Direction dir : getDirections()) {
-                    if(rowInc == dir.getRowInc() && colInc == dir.getColInc()) {
-                        return dir;
-                    }
-                }
+        public boolean canMove(Color color, Square from, Square to, Piece[][] board) {
+            // moving straight
+            boolean isWhite = color.equals(Color.WHITE);
+            boolean canMove2steps = isWhite && from.getRow() == 6 || !isWhite && from.getRow() == 1;
+            Direction dir = isWhite ? Direction.UP : Direction.DOWN;
+            int i = from.getRow() + dir.getRowInc();
+            int j = from.getCol();
+            boolean hitObstacle = board[i][j] != null;
+            if(i == to.getRow() && j == to.getCol()) {
+                return !hitObstacle;
+            }
+            i += dir.getRowInc();
+            if(canMove2steps && i == to.getRow() && j == to.getCol() && !hitObstacle) {
+                return board[i][j] == null;
+            }
+            // moving diagonally
+            Direction[] directions;
+            if(isWhite) {
+                directions = new Direction[]{Direction.UPLEFT, Direction.UPRIGHT};
             } else {
-                if(rowInc == 2 && to.getRow() == 1) {
-                    return colInc == 0 ? Direction.DOWN : null;
-                }
-                for(Direction dir : new Direction[]{Direction.DOWN, Direction.DOWNLEFT, Direction.DOWNRIGHT}) {
-                    if(rowInc == dir.getRowInc() && colInc == dir.getColInc()) {
-                        return dir;
-                    }
+                directions = new Direction[]{Direction.DOWNLEFT, Direction.DOWNRIGHT};
+            }
+            for(Direction d : directions) {
+                i = from.getRow() + d.getRowInc();
+                j = from.getCol() + d.getColInc();
+                if(i == to.getRow() && j == to.getCol()) {
+                    return !color.equals(board[i][j].getColor());
                 }
             }
-            return null;
+            return false;
         }
     };
 
-    private static final int DIM = 8;
     private final String value;
     private final Direction[] directions;
 
@@ -70,20 +80,23 @@ public enum PieceType {
         return directions;
     }
 
-    // returns the direction in which it moved or null if it is unable to move to that square
-    public Direction canMove(Color color, Square from, Square to) {
+    public boolean canMove(Color color, Square from, Square to, Piece[][] board) {
         for(Direction dir : directions) {
+            boolean sthInTheWay = false;
             int i = from.getRow() + dir.getRowInc();
             int j = from.getCol() + dir.getColInc();
-            while (0 <= i && i < DIM && 0<= j && j < DIM) {
+            while (0 <= i && i < board.length && 0<= j && j < board[0].length && !sthInTheWay) {
                 if(to.equals(new Square(i, j))) {
-                    return dir;
+                    return board[i][j] == null || !board[i][j].getColor().equals(color);
+                }
+                if(board[i][j] != null) {
+                    sthInTheWay = true;
                 }
                 i += dir.getRowInc();
                 j += dir.getColInc();
             }
         }
-        return null;
+        return false;
     }
 
     @Override

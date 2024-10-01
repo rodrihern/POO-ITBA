@@ -46,6 +46,11 @@ public class Move {
         return to;
     }
 
+    public boolean isPromotion() {
+        return (piece.getColor() == Color.WHITE && to.getRow() == 0) ||
+                (piece.getColor() == Color.BLACK && to.getRow() == 7);
+    }
+
     @Override
     public boolean equals(Object obj) {
         return obj instanceof Move m &&

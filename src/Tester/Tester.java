@@ -4,10 +4,9 @@ import java.util.Arrays;
 
 public class Tester {
     public static void main(String[] args) {
-        myClass c = new myClass();
-        System.out.println(c.getOtherClassState());
-        c.getSt().setState(false);
-        System.out.println(c.getOtherClassState());
+        int[][] myMatrix = new int[8][2];
+        System.out.println(myMatrix.length);
+        System.out.println(myMatrix[0].length);
     }
 
 }

@@ -5,24 +5,21 @@ import Chess.utils.Direction;
 import Chess.utils.PieceType;
 import Chess.utils.Square;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class Board {
 
     private static final int DIM = 8;
     private Piece[][] board, prevBoard;
     private Square whiteKing, blackKing;
-    private ArrayList<Move> possibleEnpassants;
-
+    private boolean cwcs, cwcl, cbcs, cbsl;
+    private ArrayList<Move> possibleMoves;
 
     public Board() {
         board = new Piece[DIM][DIM];
         whiteKing = new Square("e1");
         blackKing = new Square("e8");
-        possibleEnpassants = new ArrayList<>();
+        possibleMoves = new ArrayList<>();
         // kings
         board[whiteKing.getRow()][whiteKing.getCol()] = new Piece(Color.WHITE, PieceType.KING);
         board[blackKing.getRow()][blackKing.getCol()] = new Piece(Color.BLACK, PieceType.KING);
@@ -61,42 +58,12 @@ public class Board {
         return str.toString();
     }
 
-    private boolean canMakeMove(Square from, Square to) {
-        int i = from.getRow();
-        int j = from.getCol();
-        Piece piece = board[i][j];
-        if(piece == null) {
-            return false;
+    public Piece[][] getBoardCopy() {
+        Piece[][] ans = new Piece[DIM][DIM];
+        for(int i = 0; i < DIM; i++) {
+            ans[i] = Arrays.copyOf(board[i], DIM);
         }
-        Piece dest = board[to.getRow()][to.getCol()];
-        // check that there is no piece of the same color in to
-        if(dest != null && piece.getColor().equals(dest.getColor())) {
-            return false;
-        }
-        // check that the piece can move to that square
-        Direction dir = piece.canMove(from, to);
-        if(dir == null) {
-            return false;
-        }
-        // check that if a pawn is moving diagonally it is taking
-        if(piece.getType().equals(PieceType.PAWN) && (dir.equals(Direction.UP) || dir.equals(Direction.DOWN))) {
-            return dest != null;
-        }
-        // check that there is nothing in the way
-        if(!piece.getType().equals(PieceType.KNIGHT)) {
-            i += dir.getRowInc();
-            j += dir.getColInc();
-            while(i != to.getRow() && j != to.getCol() && 0 <= i && i < DIM && 0 <= j && j < DIM) {
-                // si estan las cosas bien hechas no haria falta validar lo de los limites
-                // si lo tengo andando ver de sacarlo
-                if(board[i][j] != null) {
-                    return false;
-                }
-                i += dir.getRowInc();
-                j += dir.getColInc();
-            }
-        }
-        return true;
+        return ans;
     }
 
     private boolean isUnderAttack(Square sq) {
@@ -108,13 +75,20 @@ public class Board {
             Square otherSq = pieceSqInDir(sq, dir);
             if(otherSq != null) {
                 Piece otherPiece = board[otherSq.getRow()][otherSq.getCol()];
-                if(!otherPiece.getColor().equals(p.getColor()) && otherPiece.canMove(otherSq, sq) != null) {
+                if(!otherPiece.getColor().equals(p.getColor()) && otherPiece.canMove(otherSq, sq, this)) {
                     return true;
                 }
             }
         }
         return false;
     }
+
+
+    private boolean canMakeMove(Square from, Square to) {
+        return true;
+    }
+
+
 
     private Square pieceSqInDir(Square sq, Direction dir) {
         int i = sq.getRow() + dir.getRowInc();
@@ -123,17 +97,13 @@ public class Board {
             if(board[i][j] != null) {
                 return new Square(i, j);
             }
+            i += dir.getRowInc();
+            j += dir.getColInc();
         }
         return null;
     }
 
-    private Piece[][] boardCopy() {
-        Piece[][] ans = new Piece[DIM][DIM];
-        for(int i = 0; i < DIM; i++) {
-            ans[i] = Arrays.copyOf(board[i], DIM);
-        }
-        return ans;
-    }
+
 
 
 }

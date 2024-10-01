@@ -21,14 +21,5 @@ Para game agregar los comandos:
 Los inputs de movimiento van a ser del tipo "Nb1-c3"
 
 TODO:
-    * Cambiar la funcion de canMove por una legalMoves que agregue a un set todos los Move que puede hacer
-
-
-    + boolean hasLegalMoves(Color.color)
-    - boolean isLegal(Move move)
-    + void undo()
-    + void makeMove(Move newMove)
-    * Tester
-    * ver si hago lo de la triple repeticion y como lo hago
-    * Game
-    * Readme
+    * hacer el getPossibleMoves en el PieceType y Piece para el hasLegalMoves
+    * terminar el Board siguiendo haciendo las funciones que dice el puml
