@@ -21,5 +21,4 @@ Para game agregar los comandos:
 Los inputs de movimiento van a ser del tipo "Nb1-c3"
 
 TODO:
-    * hacer el getPossibleMoves en el PieceType y Piece para el hasLegalMoves
     * terminar el Board siguiendo haciendo las funciones que dice el puml

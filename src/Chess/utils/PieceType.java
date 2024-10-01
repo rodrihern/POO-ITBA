@@ -1,10 +1,12 @@
 package Chess.utils;
 
-import Chess.Board;
 import Chess.Piece;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 public enum PieceType {
-    KING("K", Direction.values()) {
+    KING("K", Direction.normalDirections()) {
         @Override
         public boolean canMove(Color color, Square from, Square to, Piece[][] board) {
             int i = to.getRow();
@@ -14,13 +16,18 @@ public enum PieceType {
             if(Math.abs(rowInc) > 1 || Math.abs(colInc) > 1 || (rowInc == 0 && colInc == 0)) {
                 return false;
             }
-            return board[i][j] == null || !board[i][j].getColor().equals(color);
+            return canOccupySq(i, j, color, board);
+        }
+
+        @Override
+        public Collection<Square> getPossibleDest(Square from, Piece[][] board, Color color) {
+            return possibleDestOneSq(from, board, color, Direction.normalDirections());
         }
     },
-    QUEEN("Q", Direction.values()),
+    QUEEN("Q", Direction.normalDirections()),
     BISHOP("B", Direction.diagonal()),
     ROOK("R", Direction.straight()),
-    KNIGHT("N", null) {
+    KNIGHT("N", Direction.knightDirections()) {
         @Override
         public boolean canMove(Color color, Square from, Square to, Piece[][] board) {
             int i = to.getRow();
@@ -28,43 +35,78 @@ public enum PieceType {
             int rowInc = i - from.getRow();
             int colInc = j - from.getCol();
             if((Math.abs(rowInc) == 2 && Math.abs(colInc) == 1) || (Math.abs(rowInc) == 1 && Math.abs(colInc) == 2)) {
-                return board[i][j] == null || !board[i][j].getColor().equals(color);
+                return canOccupySq(i, j, color, board);
             }
             return false;
+        }
+
+        @Override
+        public Collection<Square> getPossibleDest(Square from, Piece[][] board, Color color) {
+            return possibleDestOneSq(from, board, color, Direction.knightDirections());
         }
     },
     PAWN("P", new Direction[]{Direction.UP, Direction.UPLEFT, Direction.UPRIGHT}) {
         @Override
         public boolean canMove(Color color, Square from, Square to, Piece[][] board) {
-            // moving straight
             boolean isWhite = color.equals(Color.WHITE);
             boolean canMove2steps = isWhite && from.getRow() == 6 || !isWhite && from.getRow() == 1;
-            Direction dir = isWhite ? Direction.UP : Direction.DOWN;
-            int i = from.getRow() + dir.getRowInc();
-            int j = from.getCol();
-            boolean hitObstacle = board[i][j] != null;
-            if(i == to.getRow() && j == to.getCol()) {
-                return !hitObstacle;
-            }
-            i += dir.getRowInc();
-            if(canMove2steps && i == to.getRow() && j == to.getCol() && !hitObstacle) {
-                return board[i][j] == null;
-            }
-            // moving diagonally
             Direction[] directions;
             if(isWhite) {
-                directions = new Direction[]{Direction.UPLEFT, Direction.UPRIGHT};
+                directions = new Direction[]{Direction.UP, Direction.UPLEFT, Direction.UPRIGHT};
             } else {
-                directions = new Direction[]{Direction.DOWNLEFT, Direction.DOWNRIGHT};
+                directions = new Direction[]{Direction.DOWN, Direction.DOWNLEFT, Direction.DOWNRIGHT};
             }
-            for(Direction d : directions) {
-                i = from.getRow() + d.getRowInc();
-                j = from.getCol() + d.getColInc();
-                if(i == to.getRow() && j == to.getCol()) {
-                    return !color.equals(board[i][j].getColor());
+            for(Direction dir : directions) {
+                int i = from.getRow() + dir.getRowInc();
+                int j = from.getCol() + dir.getColInc();
+                if(dir.equals(Direction.UP) || dir.equals(Direction.DOWN)) {
+                    if(to.equals(new Square(i, j))) {
+                        return board[i][j] == null;
+                    }
+                    i += dir.getRowInc();
+                    j += dir.getColInc();
+                    if(canMove2steps && to.equals(new Square(i, j))) {
+                        return board[i][j] == null;
+                    }
+                } else {
+                    if(to.equals(new Square(i, j))) {
+                        return isTaking(i, j, color, board);
+                    }
                 }
             }
             return false;
+        }
+
+        @Override
+        public Collection<Square> getPossibleDest(Square from, Piece[][] board, Color color) {
+            boolean isWhite = color.equals(Color.WHITE);
+            boolean canMove2steps = isWhite && from.getRow() == 6 || !isWhite && from.getRow() == 1;
+            Collection<Square> ans = new ArrayList<>();
+            Direction[] directions;
+            if(isWhite) {
+                directions = new Direction[]{Direction.UP, Direction.UPLEFT, Direction.UPRIGHT};
+            } else {
+                directions = new Direction[]{Direction.DOWN, Direction.DOWNLEFT, Direction.DOWNRIGHT};
+            }
+            for(Direction dir : directions) {
+                int i = from.getRow() + dir.getRowInc();
+                int j = from.getCol() + dir.getColInc();
+                if(dir.equals(Direction.UP) || dir.equals(Direction.DOWN)) {
+                    if(board[i][j] == null) {
+                        ans.add(new Square(i, j));
+                    }
+                    i += dir.getRowInc();
+                    j += dir.getColInc();
+                    if(canMove2steps && board[i][j] == null) {
+                        ans.add(new Square(i, j));
+                    }
+                } else {
+                    if(isTaking(i, j, color, board)) {
+                        ans.add(new Square(i, j));
+                    }
+                }
+            }
+            return ans;
         }
     };
 
@@ -76,7 +118,7 @@ public enum PieceType {
         this.directions = directions;
     }
 
-    public Direction[] getDirections() {
+    protected Direction[] getDirections() {
         return directions;
     }
 
@@ -85,9 +127,9 @@ public enum PieceType {
             boolean sthInTheWay = false;
             int i = from.getRow() + dir.getRowInc();
             int j = from.getCol() + dir.getColInc();
-            while (0 <= i && i < board.length && 0<= j && j < board[0].length && !sthInTheWay) {
+            while (isWithinLimits(i, j, board) && !sthInTheWay) {
                 if(to.equals(new Square(i, j))) {
-                    return board[i][j] == null || !board[i][j].getColor().equals(color);
+                    return canOccupySq(i, j, color, board);
                 }
                 if(board[i][j] != null) {
                     sthInTheWay = true;
@@ -97,6 +139,49 @@ public enum PieceType {
             }
         }
         return false;
+    }
+
+    public Collection<Square> getPossibleDest(Square from, Piece[][] board, Color color) {
+        Collection<Square> ans = new ArrayList<>();
+        for(Direction dir : directions) {
+            boolean hitSomething = false;
+            int i = from.getRow() + dir.getRowInc();
+            int j = from.getCol() + dir.getColInc();
+            while (isWithinLimits(i, j, board) && !hitSomething) {
+                if(canOccupySq(i, j, color, board)) {
+                    ans.add(new Square(i, j));
+                } else {
+                    hitSomething = true;
+                }
+                i += dir.getRowInc();
+                j += dir.getColInc();
+            }
+        }
+        return ans;
+    }
+
+    private static boolean isWithinLimits(int i, int j, Piece[][] board) {
+        return 0 <= i && i < board.length && 0<= j && j < board[0].length;
+    }
+
+    private static boolean canOccupySq(int i, int j, Color color, Piece[][] board) {
+        return board[i][j] == null || isTaking(i, j, color, board);
+    }
+
+    private static boolean isTaking(int i, int j, Color color, Piece[][] board) {
+        return !color.equals(board[i][j].getColor());
+    }
+
+    private static Collection<Square> possibleDestOneSq(Square from, Piece[][] board, Color color, Direction[] directions) {
+        Collection<Square> ans = new ArrayList<>();
+        for(Direction dir : directions) {
+            int i = from.getRow() + dir.getRowInc();
+            int j = from.getCol() + dir.getColInc();
+            if(PieceType.isWithinLimits(i, j, board) && canOccupySq(i, j, color, board)) {
+                ans.add(new Square(i, j));
+            }
+        }
+        return ans;
     }
 
     @Override

@@ -30,7 +30,8 @@ class Piece {
     +Color getColor()
     +boolean equals(Object o)
     +String toString()
-    +Direction canMoveTo(Square dest, Piece[][] board)
+    +boolean canMove(Square from, Square to, Piece[][] board)
+    +Collection<Square> getPossibleDest(Square from, Board board)
 }
 
 class Move {
@@ -69,7 +70,8 @@ enum Direction {
 enum PieceType {
     +KING, QUEEN, ROOK, BISHOP, KNIGHT, PAWN
     +String toString()
-    +canMove(Square from, Square to, Color color, Piece[][] board)
+    +boolean canMove(Square from, Square to, Color color, Piece[][] board)
+    +Collection<Square> getPossibleDest(Square from, Piece[][] board, Color color)
 }
 
 Board *- Move

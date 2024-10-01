@@ -1,10 +1,10 @@
 package Chess;
 
 import Chess.utils.Color;
-import Chess.utils.Direction;
 import Chess.utils.PieceType;
 import Chess.utils.Square;
 
+import java.util.Collection;
 import java.util.Objects;
 
 public class Piece {
@@ -41,6 +41,10 @@ public class Piece {
 
     public boolean canMove(Square from, Square to, Board board) {
         return type.canMove(color, from, to, board.getBoardCopy());
+    }
+
+    public Collection<Square> getPossibleDest(Square from, Board board) {
+        return type.getPossibleDest(from, board.getBoardCopy(), color);
     }
 
 }
