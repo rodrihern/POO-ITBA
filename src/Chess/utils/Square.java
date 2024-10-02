@@ -34,4 +34,9 @@ public class Square {
     public int hashCode() {
         return Objects.hash(row, col);
     }
+
+    @Override
+    public String toString() {
+        return "%c%c".formatted('a' + col, '1' + row);
+    }
 }

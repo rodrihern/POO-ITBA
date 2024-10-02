@@ -10,7 +10,7 @@ class Board {
     -HashSet<Move> legalMoves
     +String toString()
     +Piece getPiece(Square sq)
-    +Piece getPiece(int i, int j)
+    +int size()
     +Collection<Move> getAllMoves()
     +Collection<Move> getLegalMoves()
     +void makeMove(Move newMove)
@@ -33,8 +33,8 @@ class Piece {
     +Color getColor()
     +boolean equals(Object o)
     +String toString()
-    +boolean canMove(Square from, Square to, Piece[][] board)
     +Collection<Square> getPossibleDest(Square from, Board board)
+    +boolean isAttacking(Square from, Square to, Board board)
 }
 
 class Move {
@@ -74,9 +74,8 @@ enum Direction {
 
 enum PieceType {
     +KING, QUEEN, ROOK, BISHOP, KNIGHT, PAWN
-    +String toString()
-    +boolean canMove(Square from, Square to, Color color, Piece[][] board)
-    +Collection<Square> getPossibleDest(Square from, Piece[][] board, Color color)
+    +String toString(
+    +Collection<Square> getPossibleDest(Square from, Board board, Color color)
 }
 
 Board *- Move

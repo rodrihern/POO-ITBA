@@ -10,16 +10,17 @@ import java.util.*;
 public class Board {
 
     private static final int DIM = 8;
-    private Piece[][] board, prevBoard;
+    private Piece[][] board;
     private Square whiteKing, blackKing;
     private boolean cwcs, cwcl, cbcs, cbsl;
-    private ArrayList<Move> possibleMoves;
+    private List<Piece[][]> prevPositions = new ArrayList<>();
+    private List<Move> allMoves = new ArrayList<>();
+    private Collection<Move> legalMoves = new HashSet<>();
 
     public Board() {
         board = new Piece[DIM][DIM];
         whiteKing = new Square("e1");
         blackKing = new Square("e8");
-        possibleMoves = new ArrayList<>();
         // kings
         board[whiteKing.getRow()][whiteKing.getCol()] = new Piece(Color.WHITE, PieceType.KING);
         board[blackKing.getRow()][blackKing.getCol()] = new Piece(Color.BLACK, PieceType.KING);
@@ -58,13 +59,45 @@ public class Board {
         return str.toString();
     }
 
-    public Piece[][] getBoardCopy() {
-        Piece[][] ans = new Piece[DIM][DIM];
-        for(int i = 0; i < DIM; i++) {
-            ans[i] = Arrays.copyOf(board[i], DIM);
-        }
-        return ans;
+    public Piece getPiece(Square sq) {
+        return board[sq.getRow()][sq.getCol()];
     }
+
+    public int size() {
+        return DIM;
+    }
+
+    Collection<Move> getAllMoves() {
+        return allMoves;
+    }
+
+    Collection<Move> getLegalMoves() {
+        return legalMoves;
+    }
+
+    public boolean hasLegalMoves() {
+        return !legalMoves.isEmpty();
+    }
+
+    // TODO
+    public void makeMove(Move newMove) {
+
+    }
+
+    public boolean isInCheck(Color color) {
+        return color.equals(Color.WHITE) ? isUnderAttack(whiteKing) : isUnderAttack(blackKing);
+    }
+
+    // TODO
+    public boolean castle() {
+        return false;
+    }
+
+    // TODO
+    public boolean promote(Square sq, Piece promotingTo) {
+        return false;
+    }
+
 
     private boolean isUnderAttack(Square sq) {
         Piece p = board[sq.getRow()][sq.getCol()];
@@ -75,7 +108,7 @@ public class Board {
             Square otherSq = pieceSqInDir(sq, dir);
             if(otherSq != null) {
                 Piece otherPiece = board[otherSq.getRow()][otherSq.getCol()];
-                if(!otherPiece.getColor().equals(p.getColor()) && otherPiece.canMove(otherSq, sq, this)) {
+                if(!otherPiece.getColor().equals(p.getColor()) && otherPiece.isAttacking(otherSq, sq, this)) {
                     return true;
                 }
             }
@@ -83,12 +116,10 @@ public class Board {
         return false;
     }
 
-
-    private boolean canMakeMove(Square from, Square to) {
+    // TODO
+    private boolean isLegal(Square from, Square to) {
         return true;
     }
-
-
 
     private Square pieceSqInDir(Square sq, Direction dir) {
         int i = sq.getRow() + dir.getRowInc();
@@ -103,7 +134,13 @@ public class Board {
         return null;
     }
 
-
+    private Piece[][] getBoardCopy() {
+        Piece[][] ans = new Piece[DIM][DIM];
+        for(int i = 0; i < DIM; i++) {
+            ans[i] = Arrays.copyOf(board[i], DIM);
+        }
+        return ans;
+    }
 
 
 }

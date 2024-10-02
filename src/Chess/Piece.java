@@ -39,12 +39,12 @@ public class Piece {
         return color == Color.WHITE ? type.toString() : type.toString().toLowerCase();
     }
 
-    public boolean canMove(Square from, Square to, Board board) {
-        return type.canMove(color, from, to, board.getBoardCopy());
+    public Collection<Square> getPossibleDest(Square from, Board board) {
+        return type.getPossibleDest(from, board, color);
     }
 
-    public Collection<Square> getPossibleDest(Square from, Board board) {
-        return type.getPossibleDest(from, board.getBoardCopy(), color);
+    public boolean isAttacking(Square from, Square to, Board board) {
+        return getPossibleDest(from, board).contains(to);
     }
 
 }

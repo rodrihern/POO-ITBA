@@ -63,4 +63,9 @@ public class Move {
     public int hashCode() {
         return Objects.hash(piece, from, to);
     }
+
+    @Override
+    public String toString() {
+        return "%s%s-%s".formatted(piece.getType(), from, to);
+    }
 }
