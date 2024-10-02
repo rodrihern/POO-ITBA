@@ -5,9 +5,9 @@ class Board {
     -Piece[][] board
     -Square whiteKing, blackKing
     -boolean cwcs, cwcl, cbcs, cbcl
-    -ArrayList<Move> allMoves
-    -ArrayList<Piece[][]> prevPositions
-    -HashSet<Move> legalMoves
+    -List<Move> allMoves
+    -List<Piece[][]> prevPositions
+    -Collection<Move> legalMoves
     +String toString()
     +Piece getPiece(Square sq)
     +int size()
@@ -17,7 +17,7 @@ class Board {
     +boolean hasLegalMoves()
     +boolean isInCheck(Color.color)
     +void castle(Color.color, Side side)
-    +void promote(Move move)
+    +void promote(Square sq, Piece promotingTo)
     -boolean isUnderAttack(Square sq)
     -boolean isLegal(Square from, Square to)
     -pieceInDir(Square sq, Direction dir)

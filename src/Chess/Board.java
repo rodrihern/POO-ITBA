@@ -12,7 +12,7 @@ public class Board {
     private static final int DIM = 8;
     private Piece[][] board;
     private Square whiteKing, blackKing;
-    private boolean cwcs, cwcl, cbcs, cbsl;
+    private boolean cwcs, cwcl, cbcs, cbcl;
     private List<Piece[][]> prevPositions = new ArrayList<>();
     private List<Move> allMoves = new ArrayList<>();
     private Collection<Move> legalMoves = new HashSet<>();
@@ -21,6 +21,7 @@ public class Board {
         board = new Piece[DIM][DIM];
         whiteKing = new Square("e1");
         blackKing = new Square("e8");
+        cwcs = cwcl = cbcs = cbcl = true;
         // kings
         board[whiteKing.getRow()][whiteKing.getCol()] = new Piece(Color.WHITE, PieceType.KING);
         board[blackKing.getRow()][blackKing.getCol()] = new Piece(Color.BLACK, PieceType.KING);

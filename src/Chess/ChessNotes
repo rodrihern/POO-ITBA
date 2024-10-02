@@ -24,6 +24,5 @@ futrure improvements:
 
 
 TODO:
-    * hacer los getPiece y reescribir el PieceType usandolo, dejando solo la de possible moves
     * hacerlo de manera tal que tengo todos los movimientos legales sacando lo de que valido legal en make move
     * terminar el Board haciendo las funciones que dice el puml
