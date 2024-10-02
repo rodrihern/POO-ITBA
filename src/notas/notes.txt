@@ -1,5 +1,5 @@
 
 
 TODO:
-* Ver algun videito de collections y ponerlos en el marcdown
-* Hacer hasta donde se pueda de la guia 6
+    * agregar al md lo que se sabe de cada map
+    * Hacer hasta donde se pueda de la guia 6

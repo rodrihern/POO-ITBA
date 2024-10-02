@@ -390,25 +390,25 @@ public class myIterableClass<T> implements Iterable<T> {
 
 ## Collections
 
-Collections es una interfaz que extiende a iterable y tiene los siguientes metodos:
-````java
-int size();
-boolean isEmpty();
-boolean contains(Object o);
-Object[] toArray();
-<T> T[] toArray(T[] a);
-boolean add(E e);
-boolean remove(Object o);
-boolean containsAll(Collection<?> c);
-boolean addAll(Collection<? extends E> c); // Unión
-boolean retainAll(Collection<?> c); // Intersección
-boolean removeAll(Collection<?> c); // Resta
-void clear();
-````
-
-Diagrama de interfaces e implementaciones de collections:
-
 ![Diagrama](./Imgs/resumen_collections.png)
+
+````java
+public interface Collection<E> extends Iterable<E> {
+    int size();
+    boolean isEmpty();
+    boolean contains(Object o);
+    Object[] toArray();
+    <T> T[] toArray(T[] a);
+    boolean add(E e);
+    boolean remove(Object o);
+    boolean containsAll(Collection<?> c);
+    boolean addAll(Collection<? extends E> c); // Unión
+    boolean retainAll(Collection<?> c); // Intersección
+    boolean removeAll(Collection<?> c); // Resta
+    void clear();
+    // ...
+}
+````
 
 Tener en cuenta que si quiero remover elementos desde un iterador, debo llamar al remove del iterador.
 Sino otra alternativa es usar el removeIf(Predicate) en las colecciones que lo implementen
@@ -416,7 +416,9 @@ Sino otra alternativa es usar el removeIf(Predicate) en las colecciones que lo i
 
 ### ArrayList
 
-Bueno si uno necesita mucho random access
+Bueno si uno necesita mucho random access, orden de insercion y acepta repetidos
+
+Los elementos deben tener sobreescrito el equals
 
 ### HashSet
 
@@ -426,8 +428,47 @@ Osea una especie de vector de listas / vector de arboles
 Sirve para que la busqueda en sets **muy grandes** sea casi O(1) en la practica,
 Aunque el peor caso puede caer en O(log n) o incluso O(n)
 
+Los elementos deben sobreescribir equals y hashcode
+
 ### TreeSet
 
 Es el unico *SortedSet* que vemos asi que si necesito un set ordenado, no hay otra alternativa
+
+los elementos deben implemetar Comparable y/o le mando un Comparator
+
+## Map
+
+La idea es que tengo una clave y un valor para poder acceder en O(1)
+
+````java
+public interface Map<K,V> {
+   int size();
+   boolean isEmpty();
+   boolean containsKey(Object key);
+   boolean containsValue(Object value);
+   V get(Object key);
+   V put(K key, V value);
+   V remove(Object key);
+   void putAll(Map<? extends K, ? extends V> m);
+   void clear();
+   Set<K> keySet();
+   Collection<V> values();
+   Set<Map.Entry<K, V>> entrySet();
+   // ...
+}
+````
+
+En cliclos usar *entrySet()* en lugar de agarrar el key y hacer un get
+
+### HashMap
+
+No tiene orden ni repetidos
+
+### TreeMap
+
+Tiene orden, no tiene repetidos (de las claves)
+
+Las claves deben tener orden natural o un Comparator
+
 
 

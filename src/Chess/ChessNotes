@@ -8,17 +8,22 @@ cuando haga el isLegal de Board recordar chequear:
     * los enpassant
     * que no este mi king under attack
 
-para el make move recordar hacer bien el arraylist de enPassants
 
 Para game agregar los comandos:
     * /draw
     * /resign
-    * /undo
-    * /toggleCoordenates
-    (y mas adelante)
-    * /flipBoard
+    * /legalMoves
+
 
 Los inputs de movimiento van a ser del tipo "Nb1-c3"
 
+futrure improvements:
+    * /undo
+    * /toggleCoordenates
+    * /flipBoard
+
+
 TODO:
-    * terminar el Board siguiendo haciendo las funciones que dice el puml
+    * hacer los getPiece y reescribir el PieceType usandolo, dejando solo la de possible moves
+    * hacerlo de manera tal que tengo todos los movimientos legales sacando lo de que valido legal en make move
+    * terminar el Board haciendo las funciones que dice el puml

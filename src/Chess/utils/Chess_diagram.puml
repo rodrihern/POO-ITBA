@@ -2,23 +2,26 @@
 
 
 class Board {
-    -Piece[][] board, prev
+    -Piece[][] board
     -Square whiteKing, blackKing
     -boolean cwcs, cwcl, cbcs, cbcl
-    -ArrayList allMoves
+    -ArrayList<Move> allMoves
+    -ArrayList<Piece[][]> prevPositions
+    -HashSet<Move> legalMoves
     +String toString()
-    +Piece[][] getBoardCopy()
-    +ArrayList<Move> getAllMoves();
+    +Piece getPiece(Square sq)
+    +Piece getPiece(int i, int j)
+    +Collection<Move> getAllMoves()
+    +Collection<Move> getLegalMoves()
     +void makeMove(Move newMove)
-    +void undo()
-    +boolean hasLegalMoves(Color.color)
+    +boolean hasLegalMoves()
     +boolean isInCheck(Color.color)
     +void castle(Color.color, Side side)
     +void promote(Move move)
-    +SequencedSet getAllMoves()
-    -isUnderAttack(Square sq)
-    -canMakeMove(Square from, Square to)
+    -boolean isUnderAttack(Square sq)
+    -boolean isLegal(Square from, Square to)
     -pieceInDir(Square sq, Direction dir)
+    -Piece[][] getBoardCopy()
 
 }
 
@@ -61,10 +64,12 @@ enum Color {
 }
 
 enum Direction {
-    +UP, DOWN, LEFT, RIGHT, UPRIGHT, UPLEFT,
-    DOWNRIGHT, DOWNLEFT
-    +int rowInc()
-    +int colInc()
+    +UP, DOWN, LEFT, RIGHT,
+    UPRIGHT, UPLEFT,DOWNRIGHT, DOWNLEFT,
+    KNIGHT_UL, KNIGHT_UR, KNIGHT_DL, KNIGHT_DR,
+    KNIGHT_LU, KNIGHT_LD, KNIGHT_RU, KNIGHT_RD
+    +int getRowInc()
+    +int getColInc()
 }
 
 enum PieceType {
