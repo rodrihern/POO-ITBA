@@ -18,6 +18,7 @@ class Board {
     +boolean isInCheck(Color.color)
     +void castle(Color.color, Side side)
     +void promote(Square sq, Piece promotingTo)
+    -void calculateLegalMoves()
     -boolean isUnderAttack(Square sq)
     -boolean isLegal(Square from, Square to)
     -pieceInDir(Square sq, Direction dir)

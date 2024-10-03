@@ -24,5 +24,6 @@ futrure improvements:
 
 
 TODO:
+    * resolver como hacer lo de los legal moves, especialmente al principio
     * hacerlo de manera tal que tengo todos los movimientos legales sacando lo de que valido legal en make move
     * terminar el Board haciendo las funciones que dice el puml

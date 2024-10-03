@@ -69,11 +69,11 @@ public class Board {
     }
 
     Collection<Move> getAllMoves() {
-        return allMoves;
+        return new ArrayList<>(allMoves);
     }
 
     Collection<Move> getLegalMoves() {
-        return legalMoves;
+        return new HashSet<>(legalMoves);
     }
 
     public boolean hasLegalMoves() {
@@ -82,6 +82,9 @@ public class Board {
 
     // TODO
     public void makeMove(Move newMove) {
+        if(!legalMoves.contains(newMove)) {
+            throw new IllegalArgumentException("Illegal Move");
+        }
 
     }
 
@@ -118,6 +121,11 @@ public class Board {
     }
 
     // TODO
+    private void calculateLegalMoves() {
+
+    }
+
+    // TODO
     private boolean isLegal(Square from, Square to) {
         return true;
     }
@@ -142,6 +150,8 @@ public class Board {
         }
         return ans;
     }
+
+
 
 
 }
