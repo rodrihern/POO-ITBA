@@ -18,12 +18,15 @@ Para game agregar los comandos:
 Los inputs de movimiento van a ser del tipo "Nb1-c3"
 
 futrure improvements:
-    * /undo
+    * /undo (creando una nueva instancia donde se hicieron todos los movimientos menos el ultimo)
+    * /god (hacer cualquier movimiento y agregar / remover piezas)
     * /toggleCoordenates
     * /flipBoard
 
 
 TODO:
+    * finished y finishReason
+    * Agregar al king que se pueda mover 2 pasos a la izq o derecha en caso de castle
     * resolver como hacer lo de los legal moves, especialmente al principio
     * hacerlo de manera tal que tengo todos los movimientos legales sacando lo de que valido legal en make move
     * terminar el Board haciendo las funciones que dice el puml
