@@ -2,7 +2,6 @@ package taller.taller8;
 
 import java.util.ArrayList;
 import java.util.function.Function;
-import java.util.function.UnaryOperator;
 
 public class SimpleArrayList<T> extends ArrayList<T> implements SimpleList<T> {
     @Override

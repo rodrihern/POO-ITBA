@@ -16,6 +16,14 @@ public class Citizen implements Comparable<Citizen> {
         return dni;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
     @Override
     public boolean equals(Object o) {
         return o instanceof Citizen c && this.dni == c.dni;

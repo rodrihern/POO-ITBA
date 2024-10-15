@@ -1,9 +1,6 @@
 package Chess;
 
-import Chess.utils.Color;
-import Chess.utils.Direction;
-import Chess.utils.PieceType;
-import Chess.utils.Square;
+import Chess.utils.*;
 
 import java.util.*;
 
@@ -12,7 +9,8 @@ public class Board {
     private static final int DIM = 8;
     private Piece[][] board;
     private Square whiteKing, blackKing;
-    private boolean cwcs, cwcl, cbcs, cbcl;
+    private boolean cwcs, cwcl, cbcs, cbcl, god;
+    FinishReason finishReason;
     private List<Piece[][]> prevPositions = new ArrayList<>();
     private List<Move> allMoves = new ArrayList<>();
     private Collection<Move> legalMoves = new HashSet<>();
@@ -22,6 +20,7 @@ public class Board {
         whiteKing = new Square("e1");
         blackKing = new Square("e8");
         cwcs = cwcl = cbcs = cbcl = true;
+        god = false;
         // kings
         board[whiteKing.getRow()][whiteKing.getCol()] = new Piece(Color.WHITE, PieceType.KING);
         board[blackKing.getRow()][blackKing.getCol()] = new Piece(Color.BLACK, PieceType.KING);
@@ -44,6 +43,8 @@ public class Board {
         for(int j = 0; j < DIM; j++) {
             board[6][j] = new Piece(Color.WHITE, PieceType.PAWN);
         }
+
+        calculateLegalMoves(Color.WHITE);
 
     }
 
@@ -76,6 +77,14 @@ public class Board {
         return new HashSet<>(legalMoves);
     }
 
+    public FinishReason getFinishReason() {
+        return finishReason;
+    }
+
+    public boolean toggleGod() {
+        return god = !god;
+    }
+
     public boolean hasLegalMoves() {
         return !legalMoves.isEmpty();
     }
@@ -85,6 +94,9 @@ public class Board {
         if(!legalMoves.contains(newMove)) {
             throw new IllegalArgumentException("Illegal Move");
         }
+        // acordarse de manejar los flags de castling
+        // acordarse de actualizar el coso de legalMoves una vez hacho el movimiento
+        // manejar enpassant y enroque
 
     }
 
@@ -92,42 +104,47 @@ public class Board {
         return color.equals(Color.WHITE) ? isUnderAttack(whiteKing) : isUnderAttack(blackKing);
     }
 
-    // TODO
-    public boolean castle() {
-        return false;
-    }
-
-    // TODO
-    public boolean promote(Square sq, Piece promotingTo) {
-        return false;
-    }
-
-
-    private boolean isUnderAttack(Square sq) {
-        Piece p = board[sq.getRow()][sq.getCol()];
-        if(p == null) {
+    public boolean canCastle(CastleType ct) {
+        if((ct == CastleType.WHITE_SHORT && !cwcs) || (ct == CastleType.WHITE_LONG && !cwcl)
+                || (ct == CastleType.BLACK_SHORT && !cbcs) || (ct == CastleType.BLACK_LONG && !cbcl)
+        ) {
             return false;
         }
-        for(Direction dir : Direction.values()) {
-            Square otherSq = pieceSqInDir(sq, dir);
-            if(otherSq != null) {
-                Piece otherPiece = board[otherSq.getRow()][otherSq.getCol()];
-                if(!otherPiece.getColor().equals(p.getColor()) && otherPiece.isAttacking(otherSq, sq, this)) {
-                    return true;
-                }
+        for(Square sq : ct.path()) {
+            if(board[sq.getRow()][sq.getCol()] != null || isUnderAttack(sq)) {
+                return false;
             }
         }
-        return false;
+        return true;
+    }
+
+    // es como un putPiece full obediente
+    public void promote(Square sq, Piece promotingTo) {
+        board[sq.getRow()][sq.getCol()] = promotingTo;
     }
 
     // TODO
-    private void calculateLegalMoves() {
-
+    private void calculateLegalMoves(Color color) {
+        // solo los normales (enpassant y castle los hago aparte en makemove)
     }
 
     // TODO
     private boolean isLegal(Square from, Square to) {
         return true;
+    }
+
+    private boolean isUnderAttack(Square sq) {
+        Piece p = board[sq.getRow()][sq.getCol()];
+        for(Direction dir : Direction.values()) {
+            Square otherSq = pieceSqInDir(sq, dir);
+            if(otherSq != null) {
+                Piece otherPiece = board[otherSq.getRow()][otherSq.getCol()];
+                if(otherPiece.isAttacking(otherSq, sq, this) && (p == null || !otherPiece.getColor().equals(p.getColor()))) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private Square pieceSqInDir(Square sq, Direction dir) {

@@ -6,7 +6,9 @@ import Chess.utils.Square;
 
 import java.util.Objects;
 
-public class Move {
+public class
+
+Move {
     private final Piece piece;
     private final Square from, to;
 

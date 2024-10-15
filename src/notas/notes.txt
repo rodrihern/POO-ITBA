@@ -1,5 +1,10 @@
 
+Siempre vamos a tratar de evitar ordenar y usar interfaces que mantengan un orden
+Factory methods para hacer colecciones inmutables EJ: List.of()
+
 
 TODO:
+    * instalar lo de Ruby y ver si puedo usar el mismo proyecto de aca
     * agregar al md lo que se sabe de cada map
-    * Hacer hasta donde se pueda de la guia 6
+    * leer 9 y 10 de guia 6
+    * hacer guia 7
