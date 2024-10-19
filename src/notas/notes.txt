@@ -1,6 +1,7 @@
 
 Siempre vamos a tratar de evitar ordenar y usar interfaces que mantengan un orden
 Factory methods para hacer colecciones inmutables EJ: List.of()
+bla bla bla
 
 
 TODO:
