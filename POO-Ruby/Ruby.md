@@ -41,3 +41,5 @@ las excepciones son cosas que no se espera que el programa se recupere
 (exactamente al reves de java)
 
 los modulos son como una libreria o una interfaz con metodos default
+
+para debuggear se usa el metodo inspect en lugar de to_s y p en lugar de puts
