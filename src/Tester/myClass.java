@@ -1,14 +1,18 @@
 package Tester;
 
 public class myClass {
+    private int num = 0;
 
-    private final State st = new State();
-
-    public State getSt() {
-        return st;
+    public int getNum() {
+        return num;
     }
 
-    public boolean getOtherClassState() {
-        return st.getState();
+    public void setNum(int num) {
+        this.num = num;
+    }
+
+    @Override
+    public String toString() {
+        return "%d".formatted(num);
     }
 }

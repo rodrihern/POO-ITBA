@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 require_relative 'product'
 require_relative 'ticket'
 
@@ -44,6 +43,5 @@ puts third_ticket
 # TICKET Nº 1002
 # ####################
 # Aspirinetas     1  $49.99
-# Aspirinetas     1  $49.99
 # ####################
-# TOTAL $99.98
+# TOTAL $49.99

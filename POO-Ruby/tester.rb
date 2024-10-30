@@ -1,6 +1,8 @@
 # frozen_string_literal: true
-hola = "hola manola"
-puts hola
-hola = 3
-puts (hola + 2)
+v = [1, 5, 2]
+p v.map { |item| item * 2}.reduce { |accum, e| accum + e}
 
+v << 3
+v.push(20)
+p v.pop
+p v
