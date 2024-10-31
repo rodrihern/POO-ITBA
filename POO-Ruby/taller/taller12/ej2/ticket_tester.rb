@@ -16,8 +16,16 @@ puts first_ticket
 # Cafiaspirina    1  $79.99
 # ####################
 # TOTAL $279.97
-
 puts
+
+## voy a reescribir el spaceship de item para cambiar el spaceship
+
+class Product
+  def <=>(other)
+    return nil unless other.is_a?(Product)
+    [@description, @price] <=> [other.description, other.price]
+  end
+end
 
 second_ticket = Ticket.new
 second_ticket.add(bayaspirina, 1)
@@ -27,21 +35,8 @@ puts second_ticket
 
 # TICKET Nº 1001
 # ####################
+# # Aspirinetas     1  $49.99
 # Bayaspirina     1  $99.99
 # Cafiaspirina    1  $79.99
-# Aspirinetas     1  $49.99
 # ####################
 # TOTAL $229.97
-
-puts
-
-third_ticket = Ticket.new
-third_ticket.add(Product.new('Aspirinetas', 49.99), 1)
-third_ticket.add(aspirinetas, 1)
-puts third_ticket
-
-# TICKET Nº 1002
-# ####################
-# Aspirinetas     1  $49.99
-# ####################
-# TOTAL $49.99

@@ -11,5 +11,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" scope="PROVIDED" name="rbtree (v0.4.6, rbenv: 3.3.0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="set (v1.1.0, rbenv: 3.3.0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="sorted_set (v1.0.3, rbenv: 3.3.0) [gem]" level="application" />
   </component>
 </module>

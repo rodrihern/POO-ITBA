@@ -1,4 +1,6 @@
 # frozen_string_literal: true
+require 'sorted_set'
+
 class Item
   attr_reader :product, :amount
   include Comparable
@@ -16,9 +18,9 @@ class Item
     return false unless other.is_a?(Item)
     @product == other.product
   end
-  alias_method :eql?, :==
+  alias_method :eql?, :== ## no es necesario en sorted set
 
-  def hash
+  def hash ## no es necesario en sorted set
     [@product].hash
   end
 
@@ -39,7 +41,7 @@ class Ticket
   @@id = 1000
 
   def initialize
-    @items = Set[]
+    @items = SortedSet.new
     @id = @@id
     @@id += 1
   end
@@ -55,7 +57,7 @@ class Ticket
 
   def to_s
     s = "Ticket N #{@id}\n##########\n"
-    @items.sort.each {|item| s += "#{item.to_s}\n"}
+    @items.each {|item| s += "#{item.to_s}\n"}
     s += "##########"
   end
 end
