@@ -1,20 +1,21 @@
 package Tester;
 
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 public class Tester {
     public static void main(String[] args) {
-        List<myClass> myArr = new ArrayList<>();
-        myArr.add(new myClass());
-        myArr.add(new myClass());
-        myArr.add(new myClass());
-        myArr.add(new myClass());
-        myArr.add(new myClass());
-        System.out.println(myArr);
-        for(myClass c : myArr) {
-            c.setNum(4);
-        }
-        System.out.println(myArr);
+        SortedSet<myClass> mySet = new TreeSet<>((o1, o2) -> o1.getNum() - o2.getNum());
+        mySet.add(new myClass(1));
+        mySet.add(new myClass(10));
+        mySet.add(new myClass(2));
+        mySet.add(new myClass(5));
+        mySet.add(new myClass(3));
+        mySet.add(new myClass(20));
+        mySet.add(new myClass(17));
+        System.out.println(mySet);
+
+
     }
 }

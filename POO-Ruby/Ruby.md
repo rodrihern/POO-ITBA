@@ -43,3 +43,13 @@ las excepciones son cosas que no se espera que el programa se recupere
 los modulos son como una libreria o una interfaz con metodos default
 
 para debuggear se usa el metodo inspect en lugar de to_s y p en lugar de puts
+
+## Collections
+
+## Array
+
+## Set
+
+### Hash
+
+es un mapa y se desreferencia usando la key como si fuera un indice de un array

@@ -1,7 +1,11 @@
 package Tester;
 
 public class myClass {
-    private int num = 0;
+    private int num;
+
+    public myClass(int num) {
+        this.num = num;
+    }
 
     public int getNum() {
         return num;
