@@ -17,7 +17,7 @@ class Product
     return false unless other.is_a?(Product)
     other.description == @description && other.price == @price
   end
-  alias_method :eql, :== ## no es necesario en sorted set
+  alias_method :eql?, :== ## no es necesario en sorted set
 
   def hash ## no es necesario en sorted set
     [@description, @price].hash
