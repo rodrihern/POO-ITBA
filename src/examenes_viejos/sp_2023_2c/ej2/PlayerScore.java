@@ -1,9 +1,5 @@
 package examenes_viejos.sp_2023_2c.ej2;
 
-import org.jetbrains.annotations.NotNull;
-
-import java.util.Comparator;
-
 public class PlayerScore<S extends Comparable<? super S>> implements Comparable<PlayerScore<S>> {
     private final String player;
     private final S score;
