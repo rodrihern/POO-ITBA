@@ -1,29 +1,42 @@
 package Tester;
 
-public abstract class Solution {
-    public static double findMedianSortedArrays(int[] nums1, int[] nums2) {
-        int[] merged = new int[nums1.length + nums2.length];
-        int i = 0, j = 0, k = 0;
+import java.util.*;
 
-        // merging the arrays
-        while(i < nums1.length && j < nums2.length) {
-            if(nums1[i] < nums2[j]) {
-                merged[k++] = nums1[i++];
-            } else if(nums1[i] > nums2[j]) {
-                merged[k++] = nums2[j++];
-            } else {
-                merged[k++] = nums1[i++];
-                merged[k++] = nums2[j++];
+class Solution {
+    public int[] shortestDistanceAfterQueries(int n, int[][] queries) {
+        int[] res = new int[queries.length];
+        int[] distFromZero = new int[n];
+        List<List<Integer>> children = new ArrayList<>();
+
+        for(int i = 0; i < n; i++) {
+            children.add(i, new ArrayList<>());
+            children.get(i).add(i+1);
+            distFromZero[i] = i;
+        }
+
+
+        for(int i = 0; i < queries.length; i++) {
+            int from = queries[i][0];
+            int to = queries[i][1];
+            children.get(from).add(to);
+
+            Queue<Integer> bfs = new LinkedList<>();
+            bfs.add(from);
+            while(!bfs.isEmpty()) {
+                int current = bfs.poll();
+                for(int child : children.get(current)) {
+                    if(distFromZero[child] > distFromZero[current] + 1) {
+                        distFromZero[child] = distFromZero[current] + 1;
+                        if(child != n+1) {
+                            bfs.add(child);
+                        }
+                    }
+                }
             }
-        }
-        while(i < nums1.length) {
-            merged[k++] = nums1[i++];
-        }
-        while(j < nums2.length) {
-            merged[k++] = nums2[j++];
+            res[i] = distFromZero[n-1];
         }
 
-        return k%2 == 0 ? (merged[k/2] + merged[k/2 - 1]) / 2.0 : merged[k/2];
-
+        return res;
     }
+
 }
