@@ -30,7 +30,7 @@ myObject = MyClass.new(parameter1, parameter2)
 
 ````ruby
 def to_s
-  return "hoy es #{@day} / #{@month} / #{year}"
+  return "hoy es #{@day} / #{@month} / #{@year}"
 end
 ````
 
@@ -49,7 +49,7 @@ def hash
   [@day, @month, @year].hash
 end
 
-attr_reader :day, :month, :year
+protected attr_reader :day, :month, :year
 ````
 
 ### Orden natural <=>
@@ -151,7 +151,7 @@ end
 # while
 while count <= 5 
   puts "El contador es #{count}"
-  contador += 1  
+  count += 1  
 end
 
 # entre parentesis va el valor inicial del acumulador 
