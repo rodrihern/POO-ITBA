@@ -1,3 +1,8 @@
+---
+materia: poo
+tipo: apuntes
+---
+
 
 
 # java
@@ -203,7 +208,7 @@ for(Operation op : Operation.values()) {
 
 En general los metodos de las interfaces son *abstractos* y *publicos* salvo que se los declare *default* y se provea una implementacion
 
-Hay herencia multiple de interfaces ya que no tienen estado interno
+Hay herencia multiple de interfaces ya que no tienen estado interno. Ver el diagrama UML de herencia en [[Uml]].
 
 Para que una clase implemente una interfaz:
 
@@ -216,6 +221,8 @@ public class myClass implements myInterface {
 
 ## Clase abstracta vs interfaz
 [video: Abstract classes](https://www.youtube.com/watch?v=HvPlEJ3LHgE)
+
+Ver también representación en UML en [[Uml#uml|Uml - clases abstractas]].
 
 | Clase abstracta                                                        | interfaz                                                                                                              |
 |------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
@@ -418,7 +425,7 @@ Sino otra alternativa es usar el removeIf(Predicate) en las colecciones que lo i
 
 Bueno si uno necesita mucho random access, orden de insercion y acepta repetidos
 
-Los elementos deben tener sobreescrito el equals
+Los elementos deben tener sobreescrito el [[Java#equals()|equals]]
 
 ### HashSet
 
@@ -428,13 +435,13 @@ Osea una especie de vector de listas / vector de arboles
 Sirve para que la busqueda en sets **muy grandes** sea casi O(1) en la practica,
 Aunque el peor caso puede caer en O(log n) o incluso O(n)
 
-Los elementos deben sobreescribir equals y hashcode
+Los elementos deben sobreescribir [[Java#equals()|equals]] y [[Java#hashCode()|hashCode]]
 
 ### TreeSet
 
 Es el unico *SortedSet* que vemos asi que si necesito un set ordenado, no hay otra alternativa
 
-los elementos deben implemetar Comparable y/o le mando un Comparator
+los elementos deben implemetar [[Java#Comparable|Comparable]] y/o le mando un [[Java#Comparator|Comparator]]
 
 ## Map
 
